@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: rgb(213, 209, 214);
+}
+
+body {
+  background-color: rgb(247, 247, 247);
+  max-width: 80vw;
+  min-width: 600px;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+header ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: FontAwesome;
+  font-size: 1.5em;
+  padding: 1em;
+}
+
+header ul li {
+  margin: 0 0.4em;
+}
+
+.header__menu input {
+  display: none;
+}
+
+.header__logo h1 {
+  font-family: "Pacifico", cursive;
+  font-size: 1.2em;
+  font-weight: 500;
+  min-width: 130px;
+  max-width: 130px;
+}
+
+.header__search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.header__search input {
+  all: unset;
+  flex: 1;
+  margin-right: 0.2em;
+  padding: 0.1em 0;
+  font-size: 1em;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.header__search i {
+  right: 5px;
+}
+
+li {
+  list-style: none;
+}
+
+h2 {
+  text-align: center;
+}
+
+.favorite__meals ul {
+  display: flex;
+  overflow: auto;
+}
+
+.favorite__meals ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1em;
+}
+
+.favorite__meals ul li img {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  object-position: center center;
+}
+
+.random__recipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+  width: 100%;
+  height: auto;
+}
+
+.recipe__info {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin: 1em;
+}
+
+.random__recipe img {
+  width: 100%;
+  height: auto;
+}
+
+.recipe__info span {
+  position: absolute;
+  bottom: 0.3em;
+  right: 0.3em;
+  font-size: 1.5em;
+}
