@@ -6,7 +6,7 @@ const tl = gsap.timeline({ defaults: { ease: "power1.out" } });
 // tl.fromTo("nav", { opacity: 0 }, { opacity: 1, duration: 1 });
 // tl.fromTo(".big-text", { opacity: 0 }, { opacity: 1, duration: 1 }, "-=1");
 
-tl.to(".slider", { y: "-100%", duration: 1, delay: 2 });
+tl.to(".slider", { y: "-100%", duration: 1, delay: 1.5 });
 tl.fromTo("h1", { opacity: 0 }, { opacity: 1, duration: 1 });
 tl.fromTo(
   ".countdown__container",
@@ -14,3 +14,4 @@ tl.fromTo(
   { opacity: 1, duration: 1 },
   "-=1"
 );
+tl.fromTo(".filter", { opacity: 0 }, { opacity: 0.5, duration: 1 }, "-=1");
