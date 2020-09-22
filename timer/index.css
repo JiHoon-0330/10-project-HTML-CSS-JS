@@ -8,8 +8,9 @@
 }
 
 body {
-  background: url("img/1600496056.png");
+  background: url("img/bg.jpg");
   background-size: cover;
+  background-repeat: no-repeat;
   background-position: center center;
   min-height: 100vh;
   display: flex;
@@ -19,10 +20,10 @@ body {
 }
 
 h1 {
-  margin-top: -2em;
+  margin-top: -5em;
   font-size: 3em;
   font-weight: 500;
-  line-height: 3;
+  line-height: 5em;
 }
 
 .countdown__container {
@@ -34,7 +35,7 @@ h1 {
 
 .countdown__container div {
   text-align: center;
-  font-size: 1.2em;
+  font-size: 1.5em;
 }
 
 .countdown__container p {
@@ -75,7 +76,16 @@ h1,
   position: absolute;
   top: 40%;
   left: 50%;
-  transform: translate(-50%, -40%);
-  font-size: 4em;
+  transform: translate(-50%, -50%);
+  font-size: 4vw;
   font-weight: 600;
+}
+
+@media screen and (max-width: 1000px) {
+  h1 {
+    font-size: 4.5vw;
+  }
+  .countdown__container div {
+    font-size: 2.5vw;
+  }
 }
