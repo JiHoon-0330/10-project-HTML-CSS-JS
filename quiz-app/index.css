@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -8,8 +9,17 @@
 }
 
 body {
+  min-height: 100vh;
+}
+
+main {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
   background-color: rgb(196, 205, 212);
   min-height: 100vh;
+  overflow: hidden;
 }
 
 .quiz__container {
@@ -58,11 +68,11 @@ input:checked ~ label::before {
 }
 
 label,
-button {
+.quiz__container button {
   cursor: pointer;
 }
 
-button {
+.quiz__container button {
   width: 100%;
   border: none;
   background-color: rgb(81, 81, 255);
@@ -71,6 +81,66 @@ button {
   font-size: 1.1em;
 }
 
-button:hover {
+.quiz__container button:hover,
+.slider__container button:hover {
   background-color: rgb(25, 25, 255);
+}
+
+.slider {
+  position: fixed;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(196, 205, 212);
+  margin: auto;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.slider__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 10px;
+  min-width: 500px;
+  box-shadow: 3px 3px 6px rgb(136, 136, 136);
+  overflow: hidden;
+}
+
+.slider__container h2 {
+  text-align: center;
+  margin: 1em;
+}
+
+.slider__container button {
+  width: 100%;
+  border: none;
+  background-color: rgb(81, 81, 255);
+  color: rgb(209, 212, 255);
+  margin-top: 2em;
+  padding: 1.2em;
+  font-size: 1.1em;
+}
+
+.main__title {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  z-index: 1;
+}
+
+h1 {
+  font-family: "Lobster", cursive;
+  text-align: center;
+  line-height: 90vh;
+  font-size: 15vw;
+  font-weight: 500;
+  letter-spacing: 10px;
 }

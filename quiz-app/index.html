@@ -9,32 +9,50 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="index.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"
+      integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ=="
+      crossorigin="anonymous"
+      defer
+    ></script>
     <script src="index.js" defer></script>
+    <script src="gsap.js" defer></script>
   </head>
   <body>
-    <div class="quiz__container">
-      <div class="quiz__main">
-        <h2 class="title question"></h2>
-        <ul>
-          <li>
-            <input type="radio" name="answer" id="a" />
-            <label for="a" class="a"></label>
-          </li>
-          <li>
-            <input type="radio" name="answer" id="b" />
-            <label for="b" class="b"></label>
-          </li>
-          <li>
-            <input type="radio" name="answer" id="c" />
-            <label for="c" class="c"></label>
-          </li>
-          <li>
-            <input type="radio" name="answer" id="d" />
-            <label for="d" class="d"></label>
-          </li>
-        </ul>
+    <main>
+      <div class="quiz__container">
+        <div class="quiz__main">
+          <h2 class="title question"></h2>
+          <ul>
+            <li>
+              <input type="radio" name="answer" id="a" />
+              <label for="a" class="a"></label>
+            </li>
+            <li>
+              <input type="radio" name="answer" id="b" />
+              <label for="b" class="b"></label>
+            </li>
+            <li>
+              <input type="radio" name="answer" id="c" />
+              <label for="c" class="c"></label>
+            </li>
+            <li>
+              <input type="radio" name="answer" id="d" />
+              <label for="d" class="d"></label>
+            </li>
+          </ul>
+        </div>
+        <button type="button">제출</button>
       </div>
-      <button type="button">제출</button>
+    </main>
+    <div class="slider">
+      <div class="slider__container">
+        <h2>Quiz-App에 오신 걸 환영합니다.</h2>
+        <button type="button">시작하기</button>
+      </div>
+    </div>
+    <div class="main__title">
+      <h1>Quiz App</h1>
     </div>
   </body>
 </html>
