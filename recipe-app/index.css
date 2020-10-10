@@ -37,9 +37,9 @@ header ul li {
 
 .header__logo h1 {
   font-family: "Pacifico", cursive;
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: 500;
-  width: 130px;
+  width: 140px;
 }
 
 .header__search {
@@ -74,14 +74,27 @@ h2 {
 .favorite__meals {
   background-color: white;
   padding: 0 1em;
+  text-align: center;
+}
+
+.loading__favorite {
+  display: inline;
+  font-size: 3vw;
+  line-height: 4em;
+}
+
+.loading__recipe {
+  display: inline;
+  text-align: center;
+  font-size: 3vw;
+  line-height: 4em;
 }
 
 .favorite__meals ul {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
   column-gap: 1em;
-  overflow: hidden;
 }
 
 .favorite__meals ul li {
@@ -89,46 +102,80 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  line-height: 3em;
 }
 
 .favorite__meals ul li img {
+  display: block;
+  border-radius: 50%;
   width: 100%;
   object-fit: cover;
   object-position: 50% 50%;
+}
+
+.favorite__meals ul li span {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 3em;
 }
 
 .random__recipe {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   padding: 2em;
   width: 100%;
-  height: auto;
 }
 
 .recipe__info {
+  position: relative;
   width: 100%;
-  height: auto;
   background-color: white;
   box-shadow: 0px 1px 5px 1px rgb(189, 189, 189);
 }
-.recipe__info h2 {
-  line-height: 2em;
+
+.random__recipe > .loading__random {
+  display: inline;
+  font-size: 3vw;
+  line-height: 4em;
+  text-align: center;
+}
+
+.recipe__info > span {
+  position: absolute;
+  top: 1em;
+  font-size: 1.5em;
+  font-weight: 500;
+  padding: 0.2em 1em;
+  background-color: white;
 }
 
 .random__recipe img {
+  display: block;
   width: 100%;
-  height: auto;
   object-fit: cover;
   object-position: 50% 50%;
-  margin-top: 1em;
 }
 
-.recipe__info span {
+.random {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.random > span {
   display: inline-block;
-  width: 100%;
   font-size: 1.5em;
-  padding: 1em;
-  background-color: rgb(238, 238, 238);
+  padding: 0.5em;
+}
+
+.fa-heart {
+  color: rgb(187, 187, 187);
+}
+
+.red {
+  color: red;
 }
