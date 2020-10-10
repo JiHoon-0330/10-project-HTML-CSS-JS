@@ -1,75 +1,90 @@
-const getFirstLetterMeals = async letter => {
-  const response = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`
-  ).then(res => res.json());
-  console.log(response);
-  return response;
-};
-
-const getRandomMeals = async () => {
-  const response = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/random.php`
-  ).then(res => res.json());
-  return response;
-};
-
-const getIDMeals = async id => {
-  const response = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
-  ).then(res => res.json());
-  return response;
-};
-
 const setFavoriteMeals = async () => {
   let randomMeals = "<h2>Favorite Meals</h2><ul>";
-  let cnt = 0;
-  let maxCnt = 5;
-  for (let keys in sessionStorage) {
-    if (keys === "length" || cnt > maxCnt) {
-      break;
-    }
-    if (sessionStorage.getItem(keys) === "meal") {
-      const response = await getIDMeals(keys);
-      randomMeals += `
+  const meals = getMealsSessionStorage();
+
+  for (let i = meals.length - 1; i >= meals.length - 5; i--) {
+    const response = await getIDMeals(meals[i]);
+    const { idMeal, strMeal, strMealThumb } = response.meals[0];
+
+    randomMeals += `
       <li>
         <img
-          src=${response.meals[0].strMealThumb}
+          id=${idMeal}
+          src=${strMealThumb}
           alt=""
         />
-        <span title="${response.meals[0].strMeal}">${response.meals[0].strMeal}</span>
+        <span title="${strMeal}">${strMeal}</span>
       </li>`;
-    }
-    cnt++;
   }
 
   document.querySelector(".favorite__meals").innerHTML = randomMeals + "</ul>";
+  setImg(".favorite__meals img");
 };
 
 const setRandomRecipe = async () => {
   let randomRecipe = "<span>Random Recipe</span>";
   const response = await getRandomMeals();
+  const { idMeal, strMeal, strMealThumb } = response.meals[0];
+
   randomRecipe += `
-  <img
-    src=${response.meals[0].strMealThumb}
-    alt=""
-  />
-  <div class="random">
-    <span title="${response.meals[0].strMeal}">${response.meals[0].strMeal}</span>
-    <span><i class="fas fa-heart"></i></span>
-  </div>`;
+    <img
+      id=${idMeal}
+      src=${strMealThumb}
+      alt=""
+    />
+    <div class="random">
+      <span title="${strMeal}">${strMeal}</span>
+      <span><i class="fas fa-heart"></i></span>
+    </div>`;
 
   document.querySelector(".recipe__info").innerHTML = randomRecipe;
+  setHeart(idMeal);
+  setImg(".recipe__info img");
+};
 
+const removeMeal = (meals, id) => {
+  meals = meals.filter(meal => meal !== id);
+  sessionStorage.setItem("meals", JSON.stringify([...meals]));
+};
+
+const saveMeal = (meals, id) => {
+  sessionStorage.setItem("meals", JSON.stringify([...meals, id]));
+};
+
+const setHeart = id => {
   const heart = document.querySelector(".fa-heart");
+  let meals = getMealsSessionStorage();
+
+  if (meals.includes(id)) {
+    heart.classList.add("red");
+  }
+
   heart.addEventListener("click", () => {
-    if (sessionStorage.getItem(response.meals[0].idMeal)) {
-      sessionStorage.removeItem(response.meals[0].idMeal);
+    meals = getMealsSessionStorage();
+    if (meals.includes(id)) {
+      removeMeal(meals, id);
     } else {
-      sessionStorage.setItem(response.meals[0].idMeal, "meal");
+      saveMeal(meals, id);
     }
     heart.classList.toggle("red");
   });
 };
+
+const setImg = target => {
+  const img = document.querySelectorAll(target);
+  img.forEach(img => {
+    img.addEventListener("click", e => {
+      console.log(e.target.id);
+
+      document.querySelector(".popup__info").innerHTML = `hello ${e.target.id}`;
+      document.querySelector(".popup").classList.toggle("hidden");
+    });
+  });
+};
+
+document.querySelector(".close").addEventListener("click", () => {
+  document.querySelector(".popup").classList.toggle("hidden");
+});
 
 const init = () => {
   setFavoriteMeals();

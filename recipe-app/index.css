@@ -12,10 +12,14 @@ html {
 
 body {
   background-color: rgb(247, 247, 247);
-  max-width: 80vw;
+  width: 80vw;
   min-width: 600px;
   min-height: 100vh;
   margin: 0 auto;
+}
+
+i {
+  cursor: pointer;
 }
 
 header ul {
@@ -69,6 +73,10 @@ li {
 h2 {
   text-align: center;
   line-height: 3em;
+}
+
+a {
+  text-decoration: none;
 }
 
 .favorite__meals {
@@ -178,4 +186,17 @@ h2 {
 
 .red {
   color: red;
+}
+
+.popup {
+  position: absolute;
+  top: 0;
+  background-color: rgb(247, 247, 247);
+  width: 80vw;
+  min-width: 600px;
+  height: 100vh;
+}
+
+.hidden {
+  display: none;
 }
