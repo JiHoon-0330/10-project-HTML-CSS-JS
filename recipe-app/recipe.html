@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>recipe-app</title>
-    <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="recipe.css" />
     <script
       src="https://kit.fontawesome.com/20fc56bb28.js"
       crossorigin="anonymous"
       defer
     ></script>
     <script src="api.js" defer></script>
-    <script src="index.js" defer></script>
+    <script src="recipe.js" defer></script>
   </head>
   <body>
     <header>
@@ -30,11 +30,16 @@
     </header>
 
     <main>
-      <div class="favorite__meals">
-        <span class="loading__favorite">loading...</span>
-      </div>
-      <div class="random__recipe">
-        <div class="recipe__info"></div>
+      <div class="recipe">
+        <div class="recipe__header"></div>
+        <div class="recipe__info">
+          <div class="info__header">
+            <span class="title"></span>
+            <span class="info"></span>
+          </div>
+          <span></span>
+        </div>
+        <span class="recipe__instructions"></span>
       </div>
     </main>
   </body>

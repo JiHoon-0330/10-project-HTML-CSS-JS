@@ -18,6 +18,10 @@ body {
   margin: 0 auto;
 }
 
+iframe {
+  width: 100%;
+}
+
 i {
   cursor: pointer;
 }
@@ -159,6 +163,7 @@ a {
   font-weight: 500;
   padding: 0.2em 1em;
   background-color: white;
+  border-radius: 0 1em 1em 0;
 }
 
 .random__recipe img {
@@ -186,17 +191,4 @@ a {
 
 .red {
   color: red;
-}
-
-.popup {
-  position: absolute;
-  top: 0;
-  background-color: rgb(247, 247, 247);
-  width: 80vw;
-  min-width: 600px;
-  height: 100vh;
-}
-
-.hidden {
-  display: none;
 }

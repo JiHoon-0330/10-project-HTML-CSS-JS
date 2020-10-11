@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: rgb(213, 209, 214);
+}
+
+body {
+  background-color: rgb(247, 247, 247);
+  width: 80vw;
+  min-width: 600px;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+
+iframe {
+  width: 100%;
+}
+
+i {
+  cursor: pointer;
+}
+
+header ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: FontAwesome;
+  font-size: 1.5em;
+  padding: 1em;
+}
+
+header ul li {
+  margin: 0 0.4em;
+}
+
+.header__menu input {
+  display: none;
+}
+
+.header__logo h1 {
+  font-family: "Pacifico", cursive;
+  font-size: 1.4em;
+  font-weight: 500;
+  width: 140px;
+}
+
+.header__search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.header__search input {
+  all: unset;
+  flex: 1;
+  margin-right: 0.2em;
+  padding: 0.1em 0;
+  font-size: 1em;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.header__search i {
+  right: 5px;
+}
+
+li {
+  list-style: none;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2em;
+  width: 100%;
+}
+
+.recipe {
+  position: relative;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0px 1px 5px 1px rgb(189, 189, 189);
+}
+
+.recipe__header {
+  position: relative;
+}
+
+.recipe__header > img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  transition: all 0.2s ease-in-out;
+}
+
+.recipe__header:hover > img {
+  filter: brightness(80%);
+  opacity: 0.5;
+}
+
+.recipe__header:hover > ul {
+  opacity: 1;
+  bottom: 0.5em;
+}
+
+.recipe__header > ul {
+  position: absolute;
+  opacity: 0;
+  left: 0.5em;
+  bottom: 0em;
+  font-size: 1.2em;
+  transition: all 0.5s ease-in-out;
+}
+
+.recipe__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.recipe__info > span {
+  display: inline-block;
+  font-size: 1.5em;
+  padding: 0.5em;
+}
+
+.info__header > span {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+}
+
+.title {
+  font-size: 1.5em;
+}
+
+.info {
+  font-size: 1.1em;
+}
+
+.recipe__instructions {
+  display: inline-block;
+  padding: 0.5em 0.5em;
+  color: rgb(39, 39, 39);
+}
+
+.fa-heart {
+  color: rgb(187, 187, 187);
+}
+
+.red {
+  color: red;
+}

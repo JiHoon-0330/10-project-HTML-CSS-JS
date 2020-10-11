@@ -1,8 +1,3 @@
-const getMealsSessionStorage = () => {
-  const meals = sessionStorage.getItem("meals");
-  return meals ? JSON.parse(meals) : "[]";
-};
-
 const getFirstLetterMeals = async letter => {
   const response = await fetch(
     `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`

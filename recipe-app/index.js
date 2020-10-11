@@ -1,24 +1,38 @@
+const getMealsSessionStorage = () => {
+  const meals = sessionStorage.getItem("meals");
+  return meals ? JSON.parse(meals) : [];
+};
+
 const setFavoriteMeals = async () => {
   let randomMeals = "<h2>Favorite Meals</h2><ul>";
   const meals = getMealsSessionStorage();
+  const len = meals.length;
+  const maxLen = len - 5;
 
-  for (let i = meals.length - 1; i >= meals.length - 5; i--) {
-    const response = await getIDMeals(meals[i]);
-    const { idMeal, strMeal, strMealThumb } = response.meals[0];
+  if (meals.length) {
+    for (let i = len - 1; i >= maxLen && i >= 0; i--) {
+      const response = await getIDMeals(meals[i]);
+      const { idMeal, strMeal, strMealThumb } = response.meals[0];
 
-    randomMeals += `
-      <li>
-        <img
-          id=${idMeal}
-          src=${strMealThumb}
-          alt=""
-        />
-        <span title="${strMeal}">${strMeal}</span>
-      </li>`;
+      randomMeals += `
+        <li>
+          <a href="/recipe-app/recipe.html?id=${idMeal}">
+            <img
+              id=${idMeal}
+              src=${strMealThumb}
+              alt=""
+            />
+          </a>
+          <span title="${strMeal}">${strMeal}</span>
+        </li>`;
+    }
+
+    document.querySelector(".favorite__meals").innerHTML =
+      randomMeals + "</ul>";
+  } else {
+    document.querySelector(".loading__favorite").textContent =
+      "좋아하는 음식을 저장해보세요!";
   }
-
-  document.querySelector(".favorite__meals").innerHTML = randomMeals + "</ul>";
-  setImg(".favorite__meals img");
 };
 
 const setRandomRecipe = async () => {
@@ -27,11 +41,13 @@ const setRandomRecipe = async () => {
   const { idMeal, strMeal, strMealThumb } = response.meals[0];
 
   randomRecipe += `
-    <img
-      id=${idMeal}
-      src=${strMealThumb}
-      alt=""
-    />
+    <a href="/recipe-app/recipe.html?id=${idMeal}">
+      <img
+        id=${idMeal}
+        src=${strMealThumb}
+        alt=""
+      />
+    </a>
     <div class="random">
       <span title="${strMeal}">${strMeal}</span>
       <span><i class="fas fa-heart"></i></span>
@@ -39,7 +55,6 @@ const setRandomRecipe = async () => {
 
   document.querySelector(".recipe__info").innerHTML = randomRecipe;
   setHeart(idMeal);
-  setImg(".recipe__info img");
 };
 
 const removeMeal = (meals, id) => {
@@ -70,21 +85,11 @@ const setHeart = id => {
   });
 };
 
-const setImg = target => {
-  const img = document.querySelectorAll(target);
-  img.forEach(img => {
-    img.addEventListener("click", e => {
-      console.log(e.target.id);
-
-      document.querySelector(".popup__info").innerHTML = `hello ${e.target.id}`;
-      document.querySelector(".popup").classList.toggle("hidden");
-    });
-  });
+const readHTML = () => {
+  const html = `<object type="text/html" data="header.html"></object>`;
+  console.log(html);
+  document.querySelector("header").innerHTML = html;
 };
-
-document.querySelector(".close").addEventListener("click", () => {
-  document.querySelector(".popup").classList.toggle("hidden");
-});
 
 const init = () => {
   setFavoriteMeals();
