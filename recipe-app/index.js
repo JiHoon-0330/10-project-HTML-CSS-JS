@@ -1,8 +1,3 @@
-const getMealsSessionStorage = () => {
-  const meals = sessionStorage.getItem("meals");
-  return meals ? JSON.parse(meals) : [];
-};
-
 const setFavoriteMeals = async () => {
   let randomMeals = "<h2>Favorite Meals</h2><ul>";
   const meals = getMealsSessionStorage();
@@ -55,40 +50,6 @@ const setRandomRecipe = async () => {
 
   document.querySelector(".recipe__info").innerHTML = randomRecipe;
   setHeart(idMeal);
-};
-
-const removeMeal = (meals, id) => {
-  meals = meals.filter(meal => meal !== id);
-  sessionStorage.setItem("meals", JSON.stringify([...meals]));
-};
-
-const saveMeal = (meals, id) => {
-  sessionStorage.setItem("meals", JSON.stringify([...meals, id]));
-};
-
-const setHeart = id => {
-  const heart = document.querySelector(".fa-heart");
-  let meals = getMealsSessionStorage();
-
-  if (meals.includes(id)) {
-    heart.classList.add("red");
-  }
-
-  heart.addEventListener("click", () => {
-    meals = getMealsSessionStorage();
-    if (meals.includes(id)) {
-      removeMeal(meals, id);
-    } else {
-      saveMeal(meals, id);
-    }
-    heart.classList.toggle("red");
-  });
-};
-
-const readHTML = () => {
-  const html = `<object type="text/html" data="header.html"></object>`;
-  console.log(html);
-  document.querySelector("header").innerHTML = html;
 };
 
 const init = () => {

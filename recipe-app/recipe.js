@@ -5,7 +5,14 @@ const id = param.split("=")[1];
 const getMealInfo = async () => {
   const response = await getIDMeals(id);
   const meal = response.meals[0];
-  const { strMeal, strMealThumb, strArea, strCategory, strInstructions } = meal;
+  const {
+    idMeal,
+    strMeal,
+    strMealThumb,
+    strArea,
+    strCategory,
+    strInstructions
+  } = meal;
   document.querySelector(".title").textContent = strMeal;
   document.querySelector(".info").textContent = `#${strArea} #${strCategory}`;
 
@@ -28,6 +35,8 @@ const getMealInfo = async () => {
   }
   document.querySelector(".recipe__header").innerHTML += `${li}</ul>`;
 
+  setHeart(idMeal);
+
   console.log(meal);
 };
 
@@ -36,5 +45,3 @@ const init = () => {
 };
 
 init();
-
-console.log(url, id);

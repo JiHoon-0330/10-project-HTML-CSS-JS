@@ -1,0 +1,41 @@
+main {
+  padding: 2em;
+}
+
+main > div:not(:last-child) {
+  margin-bottom: 2em;
+}
+
+.title {
+  font-size: 2em;
+  line-height: 1.5em;
+}
+
+.result > ul {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(5, minmax(90px, 1fr));
+  gap: 1em 1em;
+}
+
+.result li {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0px 1px 5px 1px rgb(189, 189, 189);
+}
+
+.result span {
+  display: inline-block;
+  padding: 0 0.2em;
+}
+
+.tag {
+  font-size: 0.9em;
+  color: rgb(95, 95, 95);
+}
+
+.result img {
+  width: 100%;
+  display: flex;
+}
