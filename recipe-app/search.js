@@ -13,52 +13,61 @@ const getResult = async () => {
 
 const setNameResult = meals => {
   console.log(`name:`, meals);
+  let li = "";
   if (meals) {
-    let li = "";
+    li = "<ul>";
     for (let i = 0; i < meals.length; i++) {
       const { idMeal, strMeal, strArea, strCategory, strMealThumb } = meals[i];
       li += `
       <li>
-        <a href="/recipe-app/recipe.html?id=${idMeal}"><img src="${strMealThumb}" alt="" /></a>
+        <a href="/recipe-app/recipe.html?id=${idMeal}"><img src="${strMealThumb}/preview" onerror="this.src='${strMealThumb}'" alt="" /></a>
         <span>${strMeal}</span>
         <span class="tag">#${strArea} #${strCategory}</span>
       </li>`;
     }
-    document.querySelector(".name > .result > ul").innerHTML = li;
+    li += "</ul>";
   } else {
+    li = `<p>검색결과가 없습니다.</p>`;
   }
+  document.querySelector(".name > .result").innerHTML = li;
 };
 const setCategoryResult = meals => {
   console.log(`cate:`, meals);
+  let li = "";
   if (meals) {
-    let li = "";
+    li = "<ul>";
     for (let i = 0; i < meals.length; i++) {
-      const { idMeal, strMeal, strArea, strCategory, strMealThumb } = meals[i];
+      const { idMeal, strMeal, strMealThumb } = meals[i];
       li += `
       <li>
-        <a href="/recipe-app/recipe.html?id=${idMeal}"><img src="${strMealThumb}" alt="" /></a>
+        <a href="/recipe-app/recipe.html?id=${idMeal}"><img src="${strMealThumb}/preview" onerror="this.src='${strMealThumb}'" alt="" /></a>
         <span>${strMeal}</span>
       </li>`;
     }
-    document.querySelector(".category > .result > ul").innerHTML = li;
+    li += "</ul>";
   } else {
+    li = `<p>검색결과가 없습니다.</p>`;
   }
+  document.querySelector(".category > .result").innerHTML = li;
 };
 const setAreaResult = meals => {
   console.log(`area:`, meals);
+  let li = "";
   if (meals) {
-    let li = "";
+    li = "<ul>";
     for (let i = 0; i < meals.length; i++) {
-      const { idMeal, strMeal, strArea, strCategory, strMealThumb } = meals[i];
+      const { idMeal, strMeal, strMealThumb } = meals[i];
       li += `
       <li>
-        <a href="/recipe-app/recipe.html?id=${idMeal}"><img src="${strMealThumb}" alt="" /></a>
+        <a href="/recipe-app/recipe.html?id=${idMeal}"><img src="${strMealThumb}/preview" onerror="this.src='${strMealThumb}'" alt="" /></a>
         <span>${strMeal}</span>
       </li>`;
     }
-    document.querySelector(".area > .result > ul").innerHTML = li;
+    li += "</ul>";
   } else {
+    li = `<p>검색결과가 없습니다.</p>`;
   }
+  document.querySelector(".area > .result").innerHTML = li;
 };
 
 const init = () => {

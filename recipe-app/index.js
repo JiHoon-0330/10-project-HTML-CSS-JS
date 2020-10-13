@@ -14,8 +14,9 @@ const setFavoriteMeals = async () => {
           <a href="/recipe-app/recipe.html?id=${idMeal}">
             <img
               id=${idMeal}
-              src=${strMealThumb}
-              alt=""
+              src=${strMealThumb}/preview
+              onerror="this.src='${strMealThumb}'"
+              alt="${strMealThumb}"
             />
           </a>
           <span title="${strMeal}">${strMeal}</span>
