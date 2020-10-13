@@ -31,7 +31,11 @@ main > div:not(:last-child) {
 
 .result span {
   display: inline-block;
+  width: 100%;
   padding: 0 0.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .tag {

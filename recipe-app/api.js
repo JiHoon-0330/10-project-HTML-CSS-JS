@@ -42,6 +42,11 @@ const getCategoryMeals = async word => {
   return response;
 };
 
+const getCategory = async meals => {
+  const response = await getIDMeals(meals[0].idMeal);
+  return response.meals[0].strCategory;
+};
+
 // favorit
 const getMealsSessionStorage = () => {
   const meals = sessionStorage.getItem("meals");
