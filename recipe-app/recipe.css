@@ -1,13 +1,16 @@
 main {
+  padding: 2em 0;
+}
+.recipe {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 2em;
+  padding: 0 2em;
   width: 100%;
 }
 
-.recipe {
+.recipe__inner {
   position: relative;
   width: 100%;
   background-color: white;
@@ -80,6 +83,42 @@ main {
   display: inline-block;
   padding: 0.5em 0.5em;
   color: rgb(39, 39, 39);
+}
+
+.category {
+  margin-top: 2em;
+  padding: 0 0.5em;
+  width: 100%;
+  background-color: white;
+}
+
+.recommend > ul {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(5, minmax(100px, 1fr));
+  gap: 0.5em;
+}
+
+.recommend img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 50%;
+}
+
+.category > h3,
+.recommend > p {
+  text-align: center;
+  line-height: 3em;
+}
+
+.recommend span {
+  display: inline-block;
+  width: 100%;
+  padding: 0 0.2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .fa-heart {

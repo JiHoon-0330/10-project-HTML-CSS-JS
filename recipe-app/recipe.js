@@ -1,16 +1,19 @@
 const url = location.href;
 const param = url.split("?")[1];
 const id = param.split("=")[1];
+const check = [];
 
 const getResult = async () => {
   const idMeals = await getIDMeals(id);
   setMealInfo(idMeals.meals[0]);
+
   const category = await getCategory(idMeals.meals);
   const categoryMeals = await getCategoryMeals(category);
-  setRecommend(categoryMeals.meals, idMeals.meals[0].strMeal);
+  printResult(categoryMeals.meals);
 };
 
 const setMealInfo = meal => {
+  let li = "<ul>";
   const {
     idMeal,
     strMeal,
@@ -19,6 +22,8 @@ const setMealInfo = meal => {
     strCategory,
     strInstructions
   } = meal;
+
+  check.push(strMeal);
 
   document.querySelector(".title").textContent = strMeal;
   document.querySelector(".info").textContent = `#${strArea} #${strCategory}`;
@@ -32,59 +37,49 @@ const setMealInfo = meal => {
     ".recipe__header"
   ).innerHTML = `<img src="${strMealThumb}" />`;
 
-  let li = "<ul>";
   for (let i = 1; i <= 20; i++) {
-    if (meal[`strIngredient${i}`]) {
-      li += `<li>${meal[`strIngredient${i}`]}  ${meal[`strMeasure${i}`]}</li>`;
-    } else {
+    if (meal[`strIngredient${i}`] === "") {
       break;
+    } else {
+      li += `<li>${meal[`strIngredient${i}`]}  ${meal[`strMeasure${i}`]}</li>`;
     }
   }
-  document.querySelector(".recipe__header").innerHTML += `${li}</ul>`;
 
+  document.querySelector(".recipe__header").innerHTML += `${li}</ul>`;
   setHeart(idMeal);
 };
 
-const setRecommend = (meals, name) => {
-  console.log(meals.length);
+const printResult = meals => {
+  let cnt = 5;
+  let meal = null;
   let li = "";
-  const check = [name];
-  if (meals) {
-    let cnt = 5;
-    if (meals.length > cnt + 1) {
-      li = "<ul>";
-      while (cnt) {
+
+  if (meals.length === 1) {
+    li = `<p>No results</p>`;
+  } else {
+    li = "<ul>";
+    while (cnt && meals.length) {
+      if (meals.length > cnt + 1) {
         const random = Math.random();
         const i = parseInt(random * meals.length);
-        const { idMeal, strMeal, strMealThumb } = meals[i];
-        if (!check.includes(strMeal)) {
-          check.push(strMeal);
-          cnt--;
-          li += `
-          <li>
-            <a href="/recipe-app/recipe.html?id=${idMeal}">
-              <img src="${strMealThumb}/preview" onerror="this.src='${strMealThumb}'" alt="" />
-            </a>
-            <span>${strMeal}</span>
-          </li>`;
-        }
-        li += "</ul>";
+        meal = meals[i];
+      } else {
+        meal = meals.pop();
       }
-    } else {
-      for (let i = 0; i < meals.length; i++) {
-        const { idMeal, strMeal, strMealThumb } = meals[i];
-        if (!check.includes(strMeal)) {
-          li += `
-          <li>
-            <a href="/recipe-app/recipe.html?id=${idMeal}">
-              <img src="${strMealThumb}/preview" onerror="this.src='${strMealThumb}'" alt="" />
-            </a>
-            <span>${strMeal}</span>
-          </li>`;
-        }
-        li += "</ul>";
+      const { idMeal, strMeal, strMealThumb } = meal;
+      if (!check.includes(strMeal)) {
+        check.push(strMeal);
+        li += `
+        <li>
+          <a href="./recipe.html?id=${idMeal}">
+            <img src="${strMealThumb}/preview" onerror="this.src='${strMealThumb}'" alt="" />
+          </a>
+          <span title="${strMeal}">${strMeal}</span>
+        </li>`;
+        cnt--;
       }
     }
+    li += "</ul>";
   }
   document.querySelector(".recommend").innerHTML = li;
 };

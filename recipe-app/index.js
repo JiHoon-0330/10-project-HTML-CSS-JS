@@ -11,7 +11,7 @@ const setFavoriteMeals = async () => {
 
       randomMeals += `
         <li>
-          <a href="/recipe-app/recipe.html?id=${idMeal}">
+          <a href="./recipe.html?id=${idMeal}">
             <img
               id=${idMeal}
               src=${strMealThumb}/preview
@@ -37,7 +37,7 @@ const setRandomRecipe = async () => {
   const { idMeal, strMeal, strMealThumb } = response.meals[0];
 
   randomRecipe += `
-    <a href="/recipe-app/recipe.html?id=${idMeal}">
+    <a href="./recipe.html?id=${idMeal}">
       <img
         id=${idMeal}
         src=${strMealThumb}

@@ -83,7 +83,7 @@ const setHeart = id => {
 
 // search
 const searchWord = word => {
-  location.href = `/recipe-app/search.html?search=${word}`;
+  location.href = `./search.html?search=${word}`;
 };
 
 document.querySelector(".fa-search").addEventListener("click", () => {

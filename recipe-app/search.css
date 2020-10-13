@@ -46,4 +46,6 @@ main > div:not(:last-child) {
 .result img {
   width: 100%;
   display: flex;
+  object-fit: cover;
+  object-position: center center;
 }
