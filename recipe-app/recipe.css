@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 main {
   padding: 2em 0;
 }
@@ -48,84 +49,44 @@ main {
   transition: all 0.5s ease-in-out;
 }
 
-.recipe__info {
+.recipe__body {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.info__header {
+.recipe__info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 0.1em 0.5em;
 }
 
-.recipe__info > span {
-  display: inline-block;
+.recipe__body > span {
+  display: block;
   font-size: 1.5em;
   padding: 0.5em;
 }
 
-.info__header > span {
-  display: inline-block;
-  padding: 0.1em 0.5em;
+.recipe__info > .tag {
+  display: block;
+
+  color: rgb(122, 122, 122);
 }
 
-.info__header > .title {
+.recipe__info > .title {
   font-size: 1.5em;
 }
 
-.info {
-  font-size: 1.1em;
-}
-
-.recipe__instructions {
-  display: inline-block;
+.instructions {
+  font-family: "Roboto", sans-serif;
+  display: block;
+  white-space: pre-wrap;
   padding: 0.5em 0.5em;
-  color: rgb(39, 39, 39);
-}
-
-.category {
-  margin-top: 2em;
-  padding: 0 0.5em;
-  width: 100%;
-  background-color: white;
-}
-
-.recommend > ul {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(5, minmax(100px, 1fr));
-  gap: 0.5em;
-}
-
-.recommend li {
-  text-align: center;
-  box-shadow: 0px 1px 5px 1px rgb(189, 189, 189);
-  border-radius: 5% 5% 0 0;
-  overflow: hidden;
-}
-
-.recommend .img {
-  width: 100%;
-  padding-bottom: 100%;
-  background-size: cover;
-}
-
-.category > h3,
-.recommend > p {
-  text-align: center;
-  line-height: 3em;
-}
-
-.recommend span {
-  text-align: center;
-  display: inline-block;
-  width: 100%;
-  padding: 0 0.2em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  color: rgb(88, 88, 88);
+  font-weight: 550;
+  line-height: 1.5em;
+  font-size: 1.1em;
 }
 
 .fa-heart {

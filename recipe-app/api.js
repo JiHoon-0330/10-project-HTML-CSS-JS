@@ -1,50 +1,33 @@
 // getAPI
-const getFirstLetterMeals = async letter => {
-  const response = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`
-  ).then(res => res.json());
-  console.log(response);
-  return response;
+const baseURL = `https://www.themealdb.com/api/json/v1/1`;
+const getApi = {
+  idMeals: async id => await api(`${baseURL}/lookup.php?i=${id}`),
+  randomMeals: async () => await api(`${baseURL}/random.php`),
+  nameMeals: async word => await api(`${baseURL}/search.php?s=${word}`),
+  categoryMeals: async word => await api(`${baseURL}/filter.php?c=${word}`),
+  areaMeals: async word => await api(`${baseURL}/filter.php?a=${word}`)
 };
 
-const getRandomMeals = async () => {
-  const response = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/random.php`
-  ).then(res => res.json());
-  return response;
-};
+const api = async url => {
+  const state = {
+    data: null,
+    error: false
+  };
+  state.data = await fetch(url)
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      } else {
+        state.error = true;
+        console.log(`res.ok err`);
+      }
+    })
+    .catch(err => {
+      state.error = true;
+      console.log(err);
+    });
 
-const getIDMeals = async id => {
-  const response = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
-  ).then(res => res.json());
-  return response;
-};
-
-const getNameMeals = async word => {
-  const response = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/search.php?s=${word}`
-  ).then(res => res.json());
-  return response;
-};
-
-const getAreaMeals = async word => {
-  const response = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/filter.php?a=${word}`
-  ).then(res => res.json());
-  return response;
-};
-
-const getCategoryMeals = async word => {
-  const response = await fetch(
-    `https://www.themealdb.com/api/json/v1/1/filter.php?c=${word}`
-  ).then(res => res.json());
-  return response;
-};
-
-const getCategory = async meals => {
-  const response = await getIDMeals(meals[0].idMeal);
-  return response.meals[0].strCategory;
+  return state;
 };
 
 // favorit
@@ -95,3 +78,40 @@ document.querySelector("#search").addEventListener("keyup", () => {
     document.querySelector(".fa-search").click();
   }
 });
+
+// printHTML
+const getHTML = (meal, error, tag) => {
+  let html = "";
+  const load = `${tag}__loading`;
+  let text = document.querySelector(`.${load}`);
+
+  if (error) {
+    text.textContent = `failed to loda...`;
+    return;
+  }
+  if (meal) {
+    text.textContent !== "" && (text.textContent = ``);
+    const { idMeal, strMeal, strMealThumb } = meal;
+    if (tag === "random") {
+      html += `
+      <a href="./recipe.html?id=${idMeal}">
+      <span class="img" id="${idMeal}" style="background-image: url('${strMealThumb}')"></span>
+      </a>
+      <div class="random">
+      <span title="${strMeal}">${strMeal}</span>
+      <span><i class="fas fa-heart"></i></span>
+      </div>`;
+    } else {
+      html += `
+      <a href="./recipe.html?id=${idMeal}">
+      <span class="img" style="background-image: url('${strMealThumb}')"></span>
+      <span class="title" title="${strMeal}">${strMeal}</span>
+      </a>
+      `;
+    }
+  } else {
+    text.textContent = `failed to load...`;
+    return;
+  }
+  return html;
+};

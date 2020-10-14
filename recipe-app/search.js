@@ -7,7 +7,7 @@ const printResult = (tag, meals) => {
   let li = "";
   if (meals) {
     for (let i = 0; i < meals.length; i++) {
-      const { idMeal, strMeal, strArea, strCategory, strMealThumb } = meals[i];
+      const { idMeal, strMeal, strMealThumb } = meals[i];
       console.log(strArea);
       li += `
       <a href="./recipe.html?id=${idMeal}">
@@ -22,31 +22,39 @@ const printResult = (tag, meals) => {
   document.querySelector(`.grid__${tag}`).innerHTML = li;
 };
 
-const setNameResult = meals => {
-  printResult("title", meals);
+const setResult = (response, tag) => {
+  let html = "";
+  const {
+    data: { meals },
+    error
+  } = response;
+  if (!meals) {
+    document.querySelector(`.${tag}__loading`).textContent = "No result";
+  } else {
+    for (let i = 0; i < meals.length; i++) {
+      html += getHTML(meals[i], error, tag);
+    }
+    console.log(document.querySelector(`.grid__${tag}`));
+    document.querySelector(`.grid__${tag}`).innerHTML = html;
+  }
 };
 
-const setCategoryResult = meals => {
-  printResult("category", meals);
+const setNameResult = async () => {
+  const response = await getApi.nameMeals(search);
+  setResult(response, "name");
 };
-
-const setAreaResult = meals => {
-  printResult("area", meals);
+const setCategoryResult = async () => {
+  const response = await getApi.categoryMeals(search);
+  setResult(response, "category");
 };
-
-const getResult = async () => {
-  const name = await getNameMeals(search);
-  setNameResult(name.meals);
-
-  const category = await getCategoryMeals(search);
-  setCategoryResult(category.meals);
-
-  const area = await getAreaMeals(search);
-  setAreaResult(area.meals);
+const setAreaResult = async () => {
+  const response = await getApi.areaMeals(search);
+  setResult(response, "area");
 };
-
 const init = () => {
-  getResult();
+  setNameResult();
+  setCategoryResult();
+  setAreaResult();
 };
 
 init();

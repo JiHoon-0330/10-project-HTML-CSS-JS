@@ -79,6 +79,20 @@ li {
 
 .grid {
   padding: 1.5em;
+  padding-top: 0;
+  background-color: white;
+}
+
+.grid h3 {
+  text-align: center;
+  font-size: 1.5em;
+  padding: 1em 0;
+}
+
+p {
+  text-align: center;
+  font-size: 1.5em;
+  color: rgb(122, 122, 122);
 }
 
 .grid > div {

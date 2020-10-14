@@ -3,86 +3,104 @@ const param = url.split("?")[1];
 const id = param.split("=")[1];
 const check = [];
 
-const getResult = async () => {
-  const idMeals = await getIDMeals(id);
-  setMealInfo(idMeals.meals[0]);
-
-  const category = await getCategory(idMeals.meals);
-  const categoryMeals = await getCategoryMeals(category);
-  printResult(categoryMeals.meals);
-};
-
-const setMealInfo = meal => {
-  let li = "<ul>";
+const setRecipe = async () => {
   const {
-    idMeal,
-    strMeal,
-    strMealThumb,
-    strArea,
-    strCategory,
-    strInstructions
-  } = meal;
+    data: { meals },
+    error
+  } = await getApi.idMeals(id);
 
-  check.push(strMeal);
-
-  document.querySelector(".title").textContent = strMeal;
-  document.querySelector(".info").textContent = `#${strArea} #${strCategory}`;
-
-  document.querySelector(".recipe__instructions").textContent = strInstructions;
-  document.querySelector(
-    ".recipe__info > span"
-  ).innerHTML = `<span><i class="fas fa-heart"></i></span>`;
-
-  document.querySelector(
-    ".recipe__header"
-  ).innerHTML = `<span class="img" style="background-image: url('${strMealThumb}')"></span>`;
-
-  for (let i = 1; i <= 20; i++) {
-    if (meal[`strIngredient${i}`] === "") {
-      break;
-    } else {
-      li += `<li>${meal[`strIngredient${i}`]}  ${meal[`strMeasure${i}`]}</li>`;
-    }
+  if (error) {
+    document.querySelector(
+      ".recipe__loading"
+    ).textContent = `failed to load...`;
+    document.querySelector(".category__loading").textContent = `No result`;
+    return;
   }
 
-  document.querySelector(".recipe__header").innerHTML += `${li}</ul>`;
-  setHeart(idMeal);
+  if (!meals) {
+    document.querySelector(
+      ".recipe__loading"
+    ).textContent = `failed to load...`;
+    document.querySelector(".category__loading").textContent = `No result`;
+    return;
+  } else {
+    let html = "";
+    let ul = "<ul>";
+    const meal = meals[0];
+    const {
+      idMeal,
+      strMeal,
+      strMealThumb,
+      strArea,
+      strCategory,
+      strInstructions
+    } = meal;
+    check.push(strMeal);
+    setSameCategory(strCategory);
+
+    for (let i = 1; i <= 20; i++) {
+      if (meal[`strIngredient${i}`] === "") {
+        break;
+      } else {
+        ul += `<li>${meal[`strIngredient${i}`]}  ${
+          meal[`strMeasure${i}`]
+        }</li>`;
+      }
+    }
+    ul += "</ul>";
+    html += `
+    <div class="recipe__inner">
+      <div class="recipe__header">
+        <span class="img" id="${idMeal}" style="background-image: url('${strMealThumb}')"></span>
+        ${ul}
+      </div>
+      <div class="recipe__body">
+        <div class="recipe__info">
+          <span class="title" title="${strMeal}">${strMeal}</span>
+          <span class="tag">#${strArea} #${strCategory}</span>
+        </div>
+        <span><i class="fas fa-heart"></i></span>
+      </div>
+      <pre class="instructions">${strInstructions}<pre>
+    </div>
+      `;
+
+    document.querySelector(".recipe").innerHTML = html;
+    const id = document.querySelector(".img").id;
+    setHeart(id);
+  }
 };
 
-const printResult = meals => {
+const setSameCategory = async category => {
+  const response = await getApi.categoryMeals(category);
+  let html = "";
   let cnt = 6;
-  let meal = null;
-  let li = "";
+  const {
+    error,
+    data: { meals }
+  } = response;
+  const newMeals = meals.slice();
 
-  if (meals.length === 1) {
-    li = `<p>No results</p>`;
+  if (newMeals.length < 2) {
+    document.querySelector(".category__loading").textContent = `No result`;
   } else {
-    while (cnt && meals.length) {
-      if (meals.length > cnt + 1) {
+    while (cnt && newMeals.length) {
+      if (newMeals.length > cnt + 1) {
         const random = Math.random();
-        const i = parseInt(random * meals.length);
+        const i = parseInt(random * newMeals.length);
         meal = meals[i];
       } else {
         meal = meals.pop();
       }
-      const { idMeal, strMeal, strMealThumb } = meal;
-      if (!check.includes(strMeal)) {
-        check.push(strMeal);
-        li += `
-          <a href="./recipe.html?id=${idMeal}">
-            <span class="img" style="background-image: url('${strMealThumb}')"></span>
-            <span class="title" title="${strMeal}">${strMeal}</span>
-            </a>
-        `;
-        cnt--;
-      }
+      html += getHTML(meal, error, "category");
+      cnt--;
     }
   }
-  document.querySelector(".grid__category").innerHTML = li;
+  document.querySelector(".grid__category").innerHTML = html;
 };
 
 const init = () => {
-  getResult();
+  setRecipe();
 };
 
 init();
