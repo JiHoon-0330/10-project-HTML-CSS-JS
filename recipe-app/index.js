@@ -1,33 +1,26 @@
 const setFavoriteMeals = async () => {
-  let randomMeals = "<h2>Favorite Meals</h2><ul>";
   const meals = getMealsSessionStorage();
   const len = meals.length;
-  const maxLen = len - 5;
+  const maxLen = len - 6;
+
+  let html = "";
 
   if (meals.length) {
     for (let i = len - 1; i >= maxLen && i >= 0; i--) {
       const response = await getIDMeals(meals[i]);
       const { idMeal, strMeal, strMealThumb } = response.meals[0];
-
-      randomMeals += `
-        <li>
-          <a href="./recipe.html?id=${idMeal}">
-            <img
-              id=${idMeal}
-              src=${strMealThumb}/preview
-              onerror="this.src='${strMealThumb}'"
-              alt="${strMealThumb}"
-            />
-          </a>
-          <span title="${strMeal}">${strMeal}</span>
-        </li>`;
+      html += `
+      <a href="./recipe.html?id=${idMeal}">
+      <span class="img" style="background-image: url('${strMealThumb}')"></span>
+      <span class="title" title="${strMeal}">${strMeal}</span>
+      </a>
+      `;
     }
 
-    document.querySelector(".favorite__meals").innerHTML =
-      randomMeals + "</ul>";
+    document.querySelector(".grid > div").innerHTML = html;
   } else {
     document.querySelector(".loading__favorite").textContent =
-      "좋아하는 음식을 저장해보세요!";
+      "Choose your favorite meal!";
   }
 };
 
@@ -38,11 +31,7 @@ const setRandomRecipe = async () => {
 
   randomRecipe += `
     <a href="./recipe.html?id=${idMeal}">
-      <img
-        id=${idMeal}
-        src=${strMealThumb}
-        alt=""
-      />
+    <span class="img" style="background-image: url('${strMealThumb}')"></span>
     </a>
     <div class="random">
       <span title="${strMeal}">${strMeal}</span>

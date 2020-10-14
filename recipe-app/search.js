@@ -6,30 +6,24 @@ const printResult = (tag, meals) => {
   console.log(``, tag);
   let li = "";
   if (meals) {
-    li = "<ul>";
     for (let i = 0; i < meals.length; i++) {
       const { idMeal, strMeal, strArea, strCategory, strMealThumb } = meals[i];
       console.log(strArea);
       li += `
-      <li>
-        <a href="./recipe.html?id=${idMeal}">
-          <img src="${strMealThumb}/preview" onerror="this.src='${strMealThumb}'" alt="" />
-        </a>
-        <span title="${strMeal}">${strMeal}</span>
-        <span class="tag">
-          ${strArea === undefined ? `` : `#${strArea} #${strCategory}`}
-        </span>
-        </li>`;
+      <a href="./recipe.html?id=${idMeal}">
+      <span class="img" style="background-image: url('${strMealThumb}/preview'), url('${strMealThumb}')"></span>
+      <span class="title" title="${strMeal}">${strMeal}</span>
+      </a>
+      `;
     }
-    li += "</ul>";
   } else {
     li = `<p>No results</p>`;
   }
-  document.querySelector(`.${tag} > .result`).innerHTML = li;
+  document.querySelector(`.grid__${tag}`).innerHTML = li;
 };
 
 const setNameResult = meals => {
-  printResult("name", meals);
+  printResult("title", meals);
 };
 
 const setCategoryResult = meals => {

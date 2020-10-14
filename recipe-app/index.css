@@ -5,13 +5,13 @@ h2 {
 
 .favorite__meals {
   background-color: white;
-  padding: 0 0.5em;
+  padding: 0 1em;
   text-align: center;
 }
 
 .loading__favorite {
   display: inline;
-  font-size: 3vw;
+  font-size: 1.5em;
   line-height: 4em;
 }
 
@@ -23,25 +23,31 @@ h2 {
 }
 
 .favorite__meals ul {
-  display: grid;
   width: 100%;
+  display: grid;
   grid-template-columns: repeat(5, minmax(100px, 1fr));
-  gap: 0.5em;
+  gap: 1em;
 }
 
-.favorite__meals ul li {
+.favorite__meals li {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  box-shadow: 0px 1px 5px 1px rgb(189, 189, 189);
+  border-radius: 5% 5% 0 0;
+  overflow: hidden;
 }
 
-.favorite__meals ul li img {
-  display: block;
-  border-radius: 50%;
+.favorite__meals a {
   width: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
+}
+
+.favorite__meals .img {
+  display: block;
+  background-size: cover;
+  width: 100%;
+  padding-bottom: 100%;
 }
 
 .favorite__meals ul li span {
@@ -50,7 +56,8 @@ h2 {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  line-height: 2em;
+  text-align: center;
+  padding: 0.3em 0.2em;
 }
 
 .random__recipe {
@@ -86,11 +93,15 @@ h2 {
   border-radius: 0 1em 1em 0;
 }
 
-.random__recipe img {
+.random__recipe a {
+  width: 100%;
+}
+
+.random__recipe .img {
   display: block;
   width: 100%;
-  object-fit: cover;
-  object-position: 50% 50%;
+  padding-bottom: 100%;
+  background-size: cover;
 }
 
 .random {
@@ -111,4 +122,13 @@ h2 {
 
 .red {
   color: red;
+}
+
+@media screen and (max-width: 900px) {
+  .grid > div {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(10px, 1fr));
+    gap: 1.5em;
+  }
 }

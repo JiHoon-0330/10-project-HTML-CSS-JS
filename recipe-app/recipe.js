@@ -35,7 +35,7 @@ const setMealInfo = meal => {
 
   document.querySelector(
     ".recipe__header"
-  ).innerHTML = `<img src="${strMealThumb}" />`;
+  ).innerHTML = `<span class="img" style="background-image: url('${strMealThumb}')"></span>`;
 
   for (let i = 1; i <= 20; i++) {
     if (meal[`strIngredient${i}`] === "") {
@@ -50,14 +50,13 @@ const setMealInfo = meal => {
 };
 
 const printResult = meals => {
-  let cnt = 5;
+  let cnt = 6;
   let meal = null;
   let li = "";
 
   if (meals.length === 1) {
     li = `<p>No results</p>`;
   } else {
-    li = "<ul>";
     while (cnt && meals.length) {
       if (meals.length > cnt + 1) {
         const random = Math.random();
@@ -70,18 +69,16 @@ const printResult = meals => {
       if (!check.includes(strMeal)) {
         check.push(strMeal);
         li += `
-        <li>
           <a href="./recipe.html?id=${idMeal}">
-            <img src="${strMealThumb}/preview" onerror="this.src='${strMealThumb}'" alt="" />
-          </a>
-          <span title="${strMeal}">${strMeal}</span>
-        </li>`;
+            <span class="img" style="background-image: url('${strMealThumb}')"></span>
+            <span class="title" title="${strMeal}">${strMeal}</span>
+            </a>
+        `;
         cnt--;
       }
     }
-    li += "</ul>";
   }
-  document.querySelector(".recommend").innerHTML = li;
+  document.querySelector(".grid__category").innerHTML = li;
 };
 
 const init = () => {
