@@ -57,8 +57,10 @@ const setHeart = id => {
     meals = getMealsSessionStorage();
     if (meals.includes(id)) {
       removeMeal(meals, id);
+      heart.classList.remove("active__red");
     } else {
       saveMeal(meals, id);
+      heart.classList.add("active__red");
     }
     heart.classList.toggle("red");
   });

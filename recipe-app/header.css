@@ -114,6 +114,10 @@ p {
   width: 100%;
   padding-bottom: 100%;
   background-size: cover;
+  transition: all 0.2s linear;
+}
+.grid .img:hover {
+  filter: brightness(70%);
 }
 
 .grid .title {
