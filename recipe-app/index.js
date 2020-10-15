@@ -9,15 +9,16 @@ const setFavoriteMeals = async () => {
         data: { meals },
         error
       } = await getApi.idMeals(id);
-      html += getHTML(meals[0], error, "favorite");
+      html += getHTML(meals[0], error, "fav");
       cnt--;
     }
   } else {
     document.querySelector(
-      ".favorite__loading"
+      ".fav__loading"
     ).textContent = `Choose your favorite meal!`;
   }
-  document.querySelector(".grid__favorite").innerHTML = html;
+  document.querySelector(".fav__loading").textContent = "";
+  document.querySelector(".grid__fav").innerHTML = html;
 };
 
 const setRandomMeal = async () => {
@@ -27,7 +28,7 @@ const setRandomMeal = async () => {
     error
   } = await getApi.randomMeals();
   html += getHTML(meals[0], error, "random");
-
+  document.querySelector(".random__loading").textContent = "";
   document.querySelector(".recipe__info").innerHTML = html;
   const id = document.querySelector(".img").id;
   setHeart(id);
@@ -39,35 +40,3 @@ const init = () => {
 };
 
 init();
-
-const printResult = meals => {
-  let cnt = 6;
-  let meal = null;
-  let li = "";
-
-  if (meals.length === 1) {
-    li = `<p>No results</p>`;
-  } else {
-    while (cnt && meals.length) {
-      if (meals.length > cnt + 1) {
-        const random = Math.random();
-        const i = parseInt(random * meals.length);
-        meal = meals[i];
-      } else {
-        meal = meals.pop();
-      }
-      const { idMeal, strMeal, strMealThumb } = meal;
-      if (!check.includes(strMeal)) {
-        check.push(strMeal);
-        li += `
-          <a href="./recipe.html?id=${idMeal}">
-            <span class="img" style="background-image: url('${strMealThumb}')"></span>
-            <span class="title" title="${strMeal}">${strMeal}</span>
-            </a>
-        `;
-        cnt--;
-      }
-    }
-  }
-  document.querySelector(".grid__category").innerHTML = li;
-};

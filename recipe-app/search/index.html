@@ -3,16 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>recipe-app | favorite</title>
-    <link rel="stylesheet" href="header.css" />
-    <link rel="stylesheet" href="favorite.css" />
+    <title>recipe-app | search</title>
+    <link rel="stylesheet" href="../header.css" />
+    <link rel="stylesheet" href="./index.css" />
     <script
       src="https://kit.fontawesome.com/20fc56bb28.js"
       crossorigin="anonymous"
       defer
     ></script>
-    <script src="api.js" defer></script>
-    <script src="favorite.js" defer></script>
+    <script src="../api.js" defer></script>
+    <script src="./index.js" defer></script>
   </head>
   <body>
     <header>
@@ -22,7 +22,7 @@
           <label for="menu"><i class="fas fa-bars"></i></label>
         </li>
         <li class="header__logo">
-          <a href="./index.html"><h1>RecipeApp</h1></a>
+          <a href="../index.html"><h1>RecipeApp</h1></a>
         </li>
         <li class="header__search">
           <input type="text" name="" id="search" /><i class="fas fa-search"></i>
@@ -31,8 +31,21 @@
     </header>
 
     <section class="grid">
-      <h3>My Favorite Meals</h3>
-      <div class="grid__favorite"></div>
+      <h3>Meals</h3>
+      <div class="grid__name"></div>
+      <p class="name__loading">loading...</p>
+    </section>
+
+    <section class="grid">
+      <h3>Category</h3>
+      <div class="grid__category"></div>
+      <p class="category__loading">loading...</p>
+    </section>
+
+    <section class="grid">
+      <h3>Area</h3>
+      <div class="grid__area"></div>
+      <p class="area__loading">loading...</p>
     </section>
   </body>
 </html>

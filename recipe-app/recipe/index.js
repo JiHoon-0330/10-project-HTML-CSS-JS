@@ -96,6 +96,7 @@ const setSameCategory = async category => {
       cnt--;
     }
   }
+  document.querySelector(".category__loading").textContent = ``;
   document.querySelector(".grid__category").innerHTML = html;
 };
 

@@ -66,7 +66,7 @@ const setHeart = id => {
 
 // search
 const searchWord = word => {
-  location.href = `./search.html?search=${word}`;
+  location.href = `/recipe-app/search/index.html?search=${word}`;
 };
 
 document.querySelector(".fa-search").addEventListener("click", () => {
@@ -90,11 +90,10 @@ const getHTML = (meal, error, tag) => {
     return;
   }
   if (meal) {
-    text.textContent !== "" && (text.textContent = ``);
     const { idMeal, strMeal, strMealThumb } = meal;
     if (tag === "random") {
       html += `
-      <a href="./recipe.html?id=${idMeal}">
+      <a href="./recipe/?id=${idMeal}">
       <span class="img" id="${idMeal}" style="background-image: url('${strMealThumb}')"></span>
       </a>
       <div class="random">
@@ -103,15 +102,19 @@ const getHTML = (meal, error, tag) => {
       </div>`;
     } else {
       html += `
-      <a href="./recipe.html?id=${idMeal}">
+      <a href="${
+        tag === "fav"
+          ? `./recipe/index.html?id=${idMeal}`
+          : `../recipe/index.html?id=${idMeal}`
+      }" >
       <span class="img" style="background-image: url('${strMealThumb}')"></span>
       <span class="title" title="${strMeal}">${strMeal}</span>
       </a>
       `;
     }
+    return html;
   } else {
     text.textContent = `failed to load...`;
     return;
   }
-  return html;
 };
