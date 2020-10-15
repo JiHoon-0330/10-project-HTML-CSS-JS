@@ -1,19 +1,22 @@
 // getAPI
-const baseURL = `https://www.themealdb.com/api/json/v1/1`;
+
 const getApi = {
-  idMeals: async id => await api(`${baseURL}/lookup.php?i=${id}`),
-  randomMeals: async () => await api(`${baseURL}/random.php`),
-  nameMeals: async word => await api(`${baseURL}/search.php?s=${word}`),
-  categoryMeals: async word => await api(`${baseURL}/filter.php?c=${word}`),
-  areaMeals: async word => await api(`${baseURL}/filter.php?a=${word}`)
+  idMeals: async id => await api(`lookup.php?i=${id}`),
+  randomMeals: async () => await api(`random.php`),
+  nameMeals: async word => await api(`search.php?s=${word}`),
+  categoryMeals: async word => await api(`filter.php?c=${word}`),
+  areaMeals: async word => await api(`filter.php?a=${word}`)
 };
 
 const api = async url => {
+  const baseURL = `https://www.themealdb.com/api/json/v1/1/`;
+  const URL = baseURL + url;
   const state = {
     data: null,
     error: false
   };
-  state.data = await fetch(url)
+
+  state.data = await fetch(URL)
     .then(res => {
       if (res.ok) {
         return res.json();

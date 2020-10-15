@@ -7,11 +7,10 @@ const tl = gsap.timeline({ defaults: { ease: "power1.out" } });
 // tl.fromTo(".big-text", { opacity: 0 }, { opacity: 1, duration: 1 }, "-=1");
 
 tl.to(".slider", { y: "-100%", duration: 1, delay: 1.5 });
-tl.fromTo("h1", { opacity: 0 }, { opacity: 1, duration: 1 });
+tl.fromTo("main", { opacity: 0 }, { opacity: 1, duration: 1 });
 tl.fromTo(
-  ".countdown__container",
-  { opacity: 0 },
-  { opacity: 1, duration: 1 },
+  ".img",
+  { filter: "brightness(100%)" },
+  { filter: "brightness(50%)", duration: 1 },
   "-=1"
 );
-tl.fromTo(".filter", { opacity: 0 }, { opacity: 0.5, duration: 1 }, "-=1");

@@ -5,62 +5,69 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: rgb(236, 236, 236);
+  outline: none;
 }
 
 body {
-  background: url("img/bg.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+input {
+  all: unset;
+  width: 100%;
+  border-bottom: 1px solid white;
+}
+
+.img {
+  position: fixed;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-image: url("img/bg.jpg");
+  background-size: cover;
+  background-position: center center;
+  z-index: -1;
+}
+
 h1 {
-  margin-top: -5em;
-  font-size: 3em;
-  font-weight: 500;
-  line-height: 5em;
+  text-align: center;
+  font-size: 2em;
 }
 
 .countdown__container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80vw;
+  width: 700px;
+}
+
+.countdown__container > * {
+  margin: 5vw 2vw;
 }
 
 .countdown__container div {
-  text-align: center;
-  font-size: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .countdown__container p {
   font-size: 5em;
-  font-weight: 600;
-  line-height: 1.5;
+  line-height: 1em;
 }
 
 .countdown__container span {
-  font-size: 1.1em;
-  font-weight: 500;
-}
-
-h1,
-.countdown__container {
-  z-index: 1;
-}
-
-.filter {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100vw;
-  height: 100vh;
-  background: black;
+  font-size: 2em;
+  line-height: 1em;
 }
 
 .slider {
@@ -81,11 +88,107 @@ h1,
   font-weight: 600;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  padding: 3em;
+  background-color: rgba(148, 148, 148, 0.801);
+  border-radius: 1em;
+  box-shadow: 1px 1px 5px rgb(255, 255, 255);
+}
+
+.form > * {
+  margin: 1em;
+}
+
+.form * {
+  font-size: 1.2em;
+}
+
+.hidden {
+  display: none;
+}
+
+.title__container {
+  position: relative;
+  width: 100%;
+}
+
+label {
+  position: absolute;
+  top: 0;
+  color: rgb(209, 209, 209);
+  transition: all 0.2s linear;
+}
+
+#title:focus ~ label,
+#title:valid ~ label {
+  top: -1.3em;
+  font-size: 0.9em;
+}
+
+#date {
+  text-align: center;
+}
+
+#title {
+  font-size: 1.5em;
+}
+#date {
+  font-size: 1.7em;
+}
+
+.button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.form button {
+  width: 8em;
+  height: 2em;
+  border-radius: 5em;
+  text-align: center;
+  margin: 0.5em;
+}
+
+.change {
+  font-size: 1.2em;
+  padding-top: 5em;
+  margin-bottom: -5em;
+}
+
+.change button {
+  background-color: rgba(230, 230, 230, 0.411);
+  width: 6em;
+  height: 2em;
+  border-radius: 5em;
+  text-align: center;
+  transition: all 0.2s linear;
+}
+
+.change button:hover {
+  background-color: rgba(248, 248, 248, 0.521);
+}
+
+.ok {
+  background-color: rgb(218, 218, 218);
+  color: rgb(41, 41, 41);
+  font-weight: 600;
+  transition: all 0.2s linear;
+}
+
+.ok:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.cancel {
+  border: 1px solid rgb(218, 218, 218);
+}
+
 @media screen and (max-width: 1000px) {
-  h1 {
-    font-size: 4.5vw;
-  }
-  .countdown__container div {
-    font-size: 2.5vw;
-  }
 }

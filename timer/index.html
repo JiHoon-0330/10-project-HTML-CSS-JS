@@ -15,32 +15,45 @@
     <script src="gsap.js" defer></script>
   </head>
   <body>
-    <h1>Happy New Year</h1>
-    <div class="countdown__container">
-      <div class="months">
-        <p>0</p>
-        <span>months</span>
+    <div class="img"></div>
+    <main>
+      <h1></h1>
+      <div class="countdown__container">
+        <div class="days">
+          <p>0</p>
+          <span>일</span>
+        </div>
+        <div class="hours">
+          <p>0</p>
+          <span>시간</span>
+        </div>
+        <div class="minutes">
+          <p>0</p>
+          <span>분</span>
+        </div>
+        <div class="seconds">
+          <p>0</p>
+          <span>초</span>
+        </div>
       </div>
-      <div class="days">
-        <p>0</p>
-        <span>days</span>
-      </div>
-      <div class="hours">
-        <p>0</p>
-        <span>hours</span>
-      </div>
-      <div class="minutes">
-        <p>0</p>
-        <span>minutes</span>
-      </div>
-      <div class="seconds">
-        <p>0</p>
-        <span>seconds</span>
-      </div>
+    </main>
+    <div class="change">
+      <button type="button">Change</button>
     </div>
-    <div class="filter"></div>
     <div class="slider">
       <span class="slider__text">Welcome! Timer Project</span>
+    </div>
+
+    <div class="form hidden">
+      <div class="title__container">
+        <input type="text" name="title" id="title" required />
+        <label for="title">Title</label>
+      </div>
+      <input type="date" name="date" id="date" required />
+      <div class="button">
+        <button class="ok" type="button">OK</button>
+        <button class="cancel" type="button">Cancel</button>
+      </div>
     </div>
   </body>
 </html>
