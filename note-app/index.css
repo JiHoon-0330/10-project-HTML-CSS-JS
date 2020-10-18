@@ -28,7 +28,8 @@ header {
   justify-content: flex-end;
   align-items: center;
   padding: 0.3em;
-  background-color: #c7ecee;
+  background-color: #c7eceee8;
+  box-shadow: 1px 3px 1px #d0ebeb;
 }
 
 header button {
@@ -40,14 +41,20 @@ header button {
   height: 30px;
   margin: 0.3em;
   border-radius: 5px;
-}
-
-.add {
-  background-color: white;
+  transition: all 0.2s linear;
+  color: #171818;
 }
 
 .clear {
-  border: 2px solid white;
+  border: 2px solid #c7ecee;
+}
+
+.add:hover {
+  background-color: #ffffff;
+}
+
+.clear:hover {
+  border: 2px solid #ffffff;
 }
 
 main {
@@ -66,6 +73,7 @@ section {
   width: 300px;
   background-color: #f9ca24;
   margin: 2em;
+  box-shadow: 1px 2px 5px #758585;
 }
 
 .icons {
