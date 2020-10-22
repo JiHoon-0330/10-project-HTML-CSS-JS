@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: rgb(230, 230, 230);
+}
+
+body {
+  background-color: rgb(39, 39, 39);
+}
+
+i {
+  font-family: FontAweseom;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: rgb(29, 29, 29);
+}
+
+header span {
+  font-size: 1rem;
+  margin: 0.25rem;
+  padding: 0.25rem;
+}
+
+section {
+  padding: 1rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 150px);
+  gap: 1rem;
+}
+
+.container div {
+  position: relative;
+}
+.img,
+.title {
+  transition: all 0.2s linear;
+}
+
+.container div:hover .img {
+  filter: brightness(50%);
+}
+
+.container div:hover .title {
+  display: block;
+}
+
+.container .img {
+  display: block;
+  position: relative;
+  padding-bottom: 150%;
+  background-size: cover;
+  background-position: center center;
+}
+
+.container .title {
+  position: absolute;
+  bottom: 0.2rem;
+  left: 0.2rem;
+}
+
+.hidden {
+  display: none;
+}
