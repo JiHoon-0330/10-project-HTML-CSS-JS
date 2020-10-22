@@ -1,25 +1,20 @@
-// const api = axios.create({
-//   baseURL: "https://api.themoviedb.org/3/",
-//   params: {
-//     api_key: "0eeaa62198c78b27a1a864f00b6de917",
-//     language: "en-US"
-//   }
-// });
-
-const apiKey = "api_key=0eeaa62198c78b27a1a864f00b6de917";
-const lang = "language=en-US";
+const imgURL = "https://image.tmdb.org/t/p/";
 
 const getApi = {
-  popular: async (value, num) =>
-    await api(`${value}/popular?${apiKey}&${lang}&page=${num}`)
+  popular: async menu => await api(`${menu}/popular`),
+  detail: async (menu, id) => await api(`${menu}/${id}`)
 };
 
 const api = async url => {
+  console.log(url);
+  const apiKey = "api_key=0eeaa62198c78b27a1a864f00b6de917";
+  const lang = "language=en-US";
   const baseURL = "https://api.themoviedb.org/3/";
-  const URL = baseURL + url;
+  const params = `?${apiKey}&${lang}&page=${1}`;
+  const URL = baseURL + url + params;
   const state = {
     data: null,
-    error: "An error has occurred"
+    error: "Failed to load results"
   };
 
   state.data = await fetch(URL)
