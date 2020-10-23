@@ -43,7 +43,9 @@ const printDetail = response => {
     ".backdrop-img"
   ).style.backgroundImage = `url("${imgURL}original${backdrop_path}")`;
 
-  const gen = genres.map(genre => genre.name);
+  let infoArr = [];
+  let info = "";
+  console.log(genres);
   let episode = 0;
   if (seasons) {
     seasons.map(season => {
@@ -51,14 +53,26 @@ const printDetail = response => {
     });
   }
 
+  genres.length ? infoArr.push([genres.map(gen => gen.name)]) : "";
+  release_date ? infoArr.push(release_date) : "";
+  first_air_date ? infoArr.push(first_air_date) : "";
+  runtime ? infoArr.push(`${runtime} minute`) : "";
+  episode ? infoArr.push(`${episode} episode`) : "";
+  adult ? infoArr.push("18+") : "";
+
+  infoArr.forEach((value, index) => {
+    console.log(value);
+    info += index < infoArr.length - 1 ? `${value} / ` : value;
+  });
+
   html += `
-  <span class="poster" style="background-image:url(${imgURL}w500${poster_path})"></span>
+  <span class="poster" style="background-image:url(${imgURL}w500${poster_path}), url(../img/empty.png)"></span>
   <div class="detail-info">
-    <h2 class="title">${original_title || original_name}</h2>
-    <p class="info">${gen} / ${release_date || first_air_date} / ${
-    runtime ? `${runtime} minutes` : `${episode} episodes`
-  } ${adult ? "/ 18+" : ""}</p>
-    <span class="overview">${overview}</span>
+    <h2 class="title">${
+      original_title || original_name || "Title cannot be loaded"
+    }</h2>
+    <p class="info">${info || "Info cannot be loaded"}</p>
+    <span class="overview">${overview || "Overview cannot be loaded"}</span>
   </div>
   `;
 

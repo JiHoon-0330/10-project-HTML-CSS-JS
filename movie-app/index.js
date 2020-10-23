@@ -26,7 +26,7 @@ const printList = response => {
     html += `
     <a href="./detail/index.html?menu=${menu}&id=${id}">
       <div javascript:getPage>
-        <sapn class="img" style="background-image:url(${imgURL}w500${poster_path})"></sapn>
+        <sapn class="img" style="background-image:url(${imgURL}w500${poster_path}), url(./img/empty.png)"></sapn>
         <span class="title hidden">${original_title || original_name}</span>
       </div>
     </a>`;
@@ -39,6 +39,17 @@ const getPopularMovie = async () => {
   const response = await getApi.popular(menu);
   printList(response);
 };
+
+const getSearchMovie = async word => {
+  if (word) {
+    const response = await getApi.search(menu, encodeURI(word));
+    printList(response);
+  }
+};
+
+document.querySelector(".search-input").addEventListener("input", e => {
+  getSearchMovie(e.target.value);
+});
 
 const init = () => {
   getPopularMovie();
