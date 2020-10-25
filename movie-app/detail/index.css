@@ -11,7 +11,7 @@
   z-index: -1;
 }
 
-main {
+.detail {
   padding: 2rem;
   display: grid;
   grid-template-columns: 400px 1fr;

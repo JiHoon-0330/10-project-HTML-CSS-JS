@@ -5,35 +5,7 @@ if (!params) {
 }
 const menu = params.split("=")[1];
 document.querySelector(`.menu-${menu}`).classList.add("select");
-document.querySelector("section > h2").textContent =
-  menu === "movie" ? "Movie" : "TV";
-
-const printList = response => {
-  const container = document.querySelector(".container");
-  const { data, error } = response;
-
-  if (error) {
-    container.textContent = error;
-    return;
-  }
-
-  const { results } = data;
-  let html = "";
-
-  results.map(result => {
-    const { original_title, original_name, poster_path, id } = result;
-
-    html += `
-    <a href="./detail/index.html?menu=${menu}&id=${id}">
-      <div javascript:getPage>
-        <sapn class="img" style="background-image:url(${imgURL}w500${poster_path}), url(./img/empty.png)"></sapn>
-        <span class="title hidden">${original_title || original_name}</span>
-      </div>
-    </a>`;
-  });
-
-  container.innerHTML = html;
-};
+const h2Text = menu === "movie" ? "Movie" : "TV";
 
 const getPopularMovie = async () => {
   const response = await getApi.popular(menu);
@@ -44,12 +16,10 @@ const getSearchMovie = async word => {
   if (word) {
     const response = await getApi.search(menu, encodeURI(word));
     printList(response);
+  } else {
+    getPopularMovie();
   }
 };
-
-document.querySelector(".search-input").addEventListener("input", e => {
-  getSearchMovie(e.target.value);
-});
 
 const init = () => {
   getPopularMovie();
