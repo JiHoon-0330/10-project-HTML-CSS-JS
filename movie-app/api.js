@@ -1,3 +1,27 @@
+const input = document.querySelector(".search-input");
+let loading = false;
+let err = false;
+let menu = null;
+let id = null;
+let pageNum = 1;
+const currentURL = location.href;
+const params = currentURL.split("?")[1];
+if (!params) {
+  location.href = `${currentURL}?menu=movie`;
+}
+const param = params.split("&");
+param.map(param => {
+  const currentParam = param.split("=");
+  switch (currentParam[0]) {
+    case "menu":
+      menu = currentParam[1];
+      break;
+    default:
+      id = currentParam[1];
+      break;
+  }
+});
+
 const imgURL = "https://image.tmdb.org/t/p/";
 const apiKey = "api_key=0eeaa62198c78b27a1a864f00b6de917";
 const lang = "language=en-US";
@@ -8,8 +32,8 @@ const getApi = {
     await api(`${menu}/popular${parameter}`, num),
   detail: async (menu, id, num = 1) =>
     await api(`${menu}/${id}${parameter}`, num),
-  search: async (menu, word) =>
-    await api(`search/${menu}${parameter}&query=${word}`)
+  search: async (menu, word, num) =>
+    await api(`search/${menu}${parameter}&query=${word}`, num)
 };
 
 const api = async (url, num = 0) => {
@@ -40,49 +64,110 @@ const api = async (url, num = 0) => {
 
 // search
 
-document.querySelector(".search-input").addEventListener("input", e => {
-  getSearchMovie(e.target.value);
+input.addEventListener("input", e => {
+  if (document.querySelector(".container")) {
+    document.querySelector(".container").innerHTML = "";
+  }
+  const search = e.target.value;
+  pageNum = 1;
+  getSearchMovie(search, pageNum);
 });
 
+input.addEventListener("keyup", () => {
+  if (window.event.keyCode === 13) {
+    getSearchMovie(input.value);
+  }
+});
 // print
 
+const getMovieByID = async id => {
+  const response = await getApi.detail(menu, id);
+  printDetail(response);
+};
+
+const setRemoveDetail = () => {
+  document.querySelector(".fa-times").addEventListener("click", () => {
+    if (!document.querySelector("section").classList.contains("hidden")) {
+      document.querySelector("section").classList.add("hidden");
+    }
+    if (document.querySelector("main").classList.contains("detail-main")) {
+      document.querySelector("main").classList.remove("detail-main");
+    }
+  });
+};
+
+const setClickPoster = () => {
+  document.querySelectorAll(".img").forEach(img => {
+    img.addEventListener("click", e => {
+      const posterID = e.target.id;
+      getMovieByID(posterID);
+      if (!document.querySelector("main").classList.contains("detail-main")) {
+        document.querySelector("main").classList.add("detail-main");
+      }
+      if (document.querySelector("section").classList.contains("hidden")) {
+        document.querySelector("section").classList.remove("hidden");
+      }
+    });
+  });
+};
+
+const setSection = () => {
+  document.querySelector("main").innerHTML += `
+  <div>
+    <div class="container"></div>
+  </div>
+  `;
+};
+
 const printList = response => {
+  loading = true;
   const { data, error } = response;
   if (error) {
-    container.textContent = error;
+    document.querySelector(
+      "main"
+    ).innerHTML = `<p class="error-message">${error}</p>`;
+    loading = false;
+    err = true;
     return;
   }
-  document.querySelector("main").innerHTML = `
-  <section>
-    <h2>${h2Text}</h2>
-    <div class="container"></div>
-  </section>
-  `;
-
+  const { results, page } = data;
+  if (page === 1) {
+    setSection();
+  }
   const container = document.querySelector(".container");
-  const { results } = data;
   let html = "";
-
+  if (!results.length) {
+    document.querySelector(
+      "main"
+    ).innerHTML = `<p class="error-message">No results were found for '${input.value}'</p>`;
+    loading = false;
+  }
   results.map(result => {
     const { original_title, original_name, poster_path, id } = result;
 
     html += `
-    <a href="/movie-app/detail/index.html?menu=${menu}&id=${id}">
       <div>
-        <sapn class="img" style="background-image:url(${imgURL}w500${poster_path}), url(./img/empty.png), url(../img/empty.png)"></sapn>
+        <sapn id=${id} class="img" style="background-image:url(${imgURL}w500${poster_path}), url(./img/empty.png), url(../img/empty.png)"></sapn>
         <span class="title hidden">${original_title || original_name}</span>
       </div>
-    </a>`;
+    `;
   });
 
-  container.innerHTML = html;
+  container.innerHTML += html;
+  loading = false;
+  setClickPoster();
 };
 
 const printDetail = response => {
+  loading = true;
   const { data, error } = response;
 
   if (error) {
-    console.log(error);
+    document.querySelector(
+      "main"
+    ).innerHTML = `<p class="error-message">${error}</p>`;
+    loading = false;
+    err = true;
     return;
   }
   const {
@@ -122,9 +207,10 @@ const printDetail = response => {
   });
 
   html += `
-  <div class="detail">
+    <span class="remove-detail"><i class="fas fa-times"></i></span>
     <div class="backdrop-img" style="background-image: url(${imgURL}original${backdrop_path})" ></div>
-    <span class="poster" style="background-image:url(${imgURL}w500${poster_path}), url(../img/empty.png)"></span>
+    <div class="detail">
+    <span class="poster" style="background-image:url(${imgURL}w500${poster_path}), url(./img/empty.png), url(../img/empty.png)"></span>
     <div class="detail-info">
       <h2 class="title">${
         original_title || original_name || "Title cannot be loaded"
@@ -135,5 +221,7 @@ const printDetail = response => {
   </div>
   `;
 
-  document.querySelector("main").innerHTML = html;
+  document.querySelector("section").innerHTML = html;
+  loading = false;
+  setRemoveDetail();
 };

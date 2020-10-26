@@ -22,13 +22,15 @@ a {
 }
 
 header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem;
   background-color: rgb(29, 29, 29);
+  z-index: 100;
 }
 
 header span {
@@ -50,8 +52,18 @@ header span {
   position: relative;
 }
 
+.search input {
+  border: none;
+  color: black;
+  outline: none;
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+}
+
 .search span {
   position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
   right: 0;
 }
 
@@ -59,11 +71,7 @@ header span {
   color: rgb(39, 39, 39);
 }
 
-section {
-  padding: 1rem;
-}
-
-h2 {
+main h2 {
   margin-bottom: 1rem;
 }
 
@@ -105,4 +113,11 @@ h2 {
 
 .hidden {
   display: none;
+}
+
+.error-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
