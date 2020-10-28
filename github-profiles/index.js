@@ -24,8 +24,8 @@ const getUser = async (user = "JiHoon-0330") => {
   return state;
 };
 
-const createUserCard = async () => {
-  const response = await getUser();
+const createUserCard = async user => {
+  const response = await getUser(user);
   console.log(response);
   const { data, error } = response;
   const { avatar_url, name, bio, followers, public_repos } = data;
@@ -40,6 +40,13 @@ const createUserCard = async () => {
   </div>
   `;
 };
+
+const input = document.querySelector("input");
+input.addEventListener("keyup", () => {
+  if (window.event.keyCode === 13 && input.value) {
+    createUserCard(input.value);
+  }
+});
 
 const init = () => {
   createUserCard();

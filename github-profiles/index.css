@@ -12,6 +12,30 @@ body {
   background-color: #262055;
 }
 
+.search {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.search input {
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+  background-color: #230a4b;
+  color: white;
+  box-shadow: inset 1px 1px 2px 2px rgb(27, 14, 59);
+}
+
+.search input::placeholder {
+  color: rgb(130, 121, 146);
+  text-align: center;
+  font-size: 1rem;
+}
+
 main {
   position: absolute;
   top: 40%;
@@ -25,7 +49,7 @@ main {
   background-color: #230a4b;
   padding: 3rem;
   border-radius: 1rem;
-  box-shadow: 1px 1px 6px 4px rgb(27, 14, 59);
+  box-shadow: inset 1px 1px 6px 4px rgb(27, 14, 59);
 }
 
 .img {
