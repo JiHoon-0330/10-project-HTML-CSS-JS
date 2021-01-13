@@ -6,7 +6,7 @@
 
 |                                        섹션 이동                                         |                                            사이트 이동                                             |
 | :--------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
-|       [recipe-app]https://github.com/JiHoon-0330/10-project-HTML-CSS-JS#recipe-app       |      [recipe-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/recipe-app/index.html)      |
+|      [recipe-app](https://github.com/JiHoon-0330/10-project-HTML-CSS-JS#recipe-app)      |      [recipe-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/recipe-app/index.html)      |
 |       [movie-app](https://github.com/JiHoon-0330/10-project-HTML-CSS-JS#movie-app)       |       [movie-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/movie-app/index.html)       |
 |        [todo-app](https://github.com/JiHoon-0330/10-project-HTML-CSS-JS#todo-app)        |        [todo-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/todo-app/index.html)        |
 |        [note-app](https://github.com/JiHoon-0330/10-project-HTML-CSS-JS#note-app)        |        [note-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/note-app/index.html)        |
