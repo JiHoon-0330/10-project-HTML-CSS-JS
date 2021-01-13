@@ -4,15 +4,15 @@
 - 디자인과 사용한 API를 참고했고, 영상에서 다루는 것 보다 세부적인 기능을 더 추가함
 - HTML / CSS / JS 만을 사용함
 
-| 섹션 이동 |                                            사이트 이동                                             |
-| :-------: | :------------------------------------------------------------------------------------------------: |
-|           |      [recipe-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/recipe-app/index.html)      |
-|           |       [movie-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/movie-app/index.html)       |
-|           |        [todo-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/todo-app/index.html)        |
-|           |        [note-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/note-app/index.html)        |
-|           | [github-profiles](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/github-profiles/index.html) |
-|           |        [quiz-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/quiz-app/index.html)        |
-|           |           [timer](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/timer/index.html)           |
+|                                        섹션 이동                                         |                                            사이트 이동                                             |
+| :--------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------: |
+|       [recipe-app]https://github.com/JiHoon-0330/10-project-HTML-CSS-JS#recipe-app       |      [recipe-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/recipe-app/index.html)      |
+|       [movie-app](https://github.com/JiHoon-0330/10-project-HTML-CSS-JS#movie-app)       |       [movie-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/movie-app/index.html)       |
+|        [todo-app](https://github.com/JiHoon-0330/10-project-HTML-CSS-JS#todo-app)        |        [todo-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/todo-app/index.html)        |
+|        [note-app](https://github.com/JiHoon-0330/10-project-HTML-CSS-JS#note-app)        |        [note-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/note-app/index.html)        |
+| [github-profiles](https://github.com/JiHoon-0330/10-project-HTML-CSS-JS#github-profiles) | [github-profiles](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/github-profiles/index.html) |
+|        [quiz-app](https://github.com/JiHoon-0330/10-project-HTML-CSS-JS#quiz-app)        |        [quiz-app](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/quiz-app/index.html)        |
+|           [timer](https://github.com/JiHoon-0330/10-project-HTML-CSS-JS#timer)           |           [timer](https://jihoon-0330.github.io/10-project-HTML-CSS-JS/timer/index.html)           |
 
 ## recipe-app
 
