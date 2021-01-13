@@ -4,6 +4,17 @@
 2. quiz-app https://jihoon-0330.github.io/10-project-HTML-CSS-JS/quiz-app/index.html
 3. recipe-app https://jihoon-0330.github.io/10-project-HTML-CSS-JS/recipe-app/index.html
 
+---
+
+![todo](https://user-images.githubusercontent.com/58219394/104447343-fa937300-55de-11eb-8bc2-384b5d67421d.png)
+
+---
+
+![note](https://user-images.githubusercontent.com/58219394/104446747-40037080-55de-11eb-9370-9ca3f903f77f.png)
+![note2](https://user-images.githubusercontent.com/58219394/104446743-3ed24380-55de-11eb-85be-c9dc4d14e95f.png)
+
+---
+
 ![github](https://user-images.githubusercontent.com/58219394/104440842-3249ed00-55d6-11eb-8c39-45f6c004bacd.png)
 
 ---

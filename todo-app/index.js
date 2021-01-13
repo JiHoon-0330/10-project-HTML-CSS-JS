@@ -1,104 +1,87 @@
 const input = document.querySelector("input");
 
-const removeTodo = (todos, id) => {
-  for (let i = 0; i < todos.length; i++) {
-    console.log(todos[i].id, id);
-    if (todos[i].id == id) {
-      todos.splice(i, 1);
-      break;
-    }
-  }
-  return todos;
+const removeTodo = id => {
+  const todos = getStorage();
+  delete todos[id];
+  console.log(todos);
+  sessionStorage.setItem(
+    "todos",
+    JSON.stringify({
+      ...todos
+    })
+  );
+  printTodos();
 };
 
-const removeIcon = id => {
-  let todos = getStorage();
-  todos = removeTodo(todos, id);
-  setStorage(todos);
-};
-
-const setRemoveIcon = () => {
-  document.querySelectorAll(".remove").forEach(rm => {
-    rm.addEventListener("click", e => {
-      const id = e.target.parentNode.id;
-      removeIcon(id);
-    });
-  });
-};
-
-const setCheck = () => {
-  document.querySelectorAll(".check").forEach(ch => {
-    ch.addEventListener("click", e => {
-      const id = e.target.parentNode.id;
-      checkIcon(id);
-    });
-  });
-  document.querySelectorAll(".text").forEach(ch => {
-    ch.addEventListener("click", e => {
-      const id = e.target.parentNode.id;
-      checkIcon(id);
-    });
-  });
-};
-
-const checkTodo = (todos, id) => {
-  for (let i = 0; i < todos.length; i++) {
-    if (todos[i].id == id) {
-      todos[i].completed = !todos[i].completed;
-      break;
-    }
-  }
-  return todos;
-};
-
-const checkIcon = id => {
-  let todos = getStorage();
-  todos = checkTodo(todos, id);
-  setStorage(todos);
+const checkTodo = id => {
+  const todos = getStorage();
+  todos[id].completed = !todos[id].completed;
+  sessionStorage.setItem(
+    "todos",
+    JSON.stringify({
+      ...todos
+    })
+  );
+  printTodos();
 };
 
 const getStorage = () => {
   const todos = sessionStorage.getItem("todos");
-  return todos ? JSON.parse(todos) : [];
+  return todos ? JSON.parse(todos) : {};
 };
+
+document.querySelector("ul").addEventListener("click", e => {
+  const target = e.target;
+  const type = target.dataset.type;
+  if (type !== "check" && type !== "remove") {
+    return;
+  } else {
+    const id = target.parentNode.id;
+    console.log(id);
+    type === "check" && checkTodo(id);
+    type === "remove" && removeTodo(id);
+  }
+});
 
 const printTodos = () => {
   const todos = getStorage();
   let html = "";
-  for (let i = 0; i < todos.length; i++) {
-    const { id, completed, text } = todos[i];
+  Object.keys(todos).forEach(item => {
+    const { id, completed, text } = todos[item];
     html += `
     <li id="${id}">
-      <i class="check far ${completed ? "fa-check-circle" : "fa-circle"}"></i>
+      <i class="far ${
+        completed ? "fa-check-circle" : "fa-circle"
+      }" data-type="check"></i>
       <span class="text ${completed ? "completed" : ""}">${text}</span>
-      <i class="fas fa-backspace remove"></i>
+      <i class="fas fa-backspace" data-type="remove"></i>
     </li>
     `;
-  }
+  });
   document.querySelector("ul").innerHTML = html;
-  setRemoveIcon();
-  setCheck();
 };
 
-const setStorage = todos => {
-  sessionStorage.setItem("todos", JSON.stringify([...todos]));
-  printTodos();
+const setStorage = obj => {
+  const todos = getStorage();
+  sessionStorage.setItem(
+    "todos",
+    JSON.stringify({
+      ...todos,
+      [Date.now()]: {
+        id: obj.id || Date.now(),
+        completed: obj.completed,
+        text: obj.value || input.value
+      }
+    })
+  );
 };
-
-const setTodo = todos => {
-  const todo = {
-    id: Date.now(),
-    completed: false,
-    text: input.value
-  };
-  todos.push(todo);
-  return todos;
-};
-
 const submitTodo = () => {
-  let todos = getStorage();
-  todos = setTodo(todos);
-  setStorage(todos);
+  setStorage({
+    id: null,
+    completed: false,
+    value: input.value
+  });
+  printTodos();
 };
 
 input.addEventListener("keyup", e => {
