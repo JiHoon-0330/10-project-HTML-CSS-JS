@@ -6,62 +6,51 @@ const getNotes = () => {
     const notes = JSON.parse(item);
     return notes;
   }
-  return [];
+  return {};
 };
 
 const addSection = (e, id, text) => {
-  const now = new Date();
   const section = `
-      <section id=${id ? id : now.getTime()}>
+      <section id=${id ? id : Date.now()}>
         <div class="icons">
-          <i class="far fa-save save"></i>
-          <i class="fas fa-trash-alt remove"></i>
+          <i class="far fa-save" data-type="save"></i>
+          <i class="fas fa-trash-alt" data-type="remove"></i>
         </div>
         <textarea class="text">${text ? text : ""}</textarea>
       </section>
       `;
   document.querySelector("main").innerHTML += section;
-  clickIcons();
 };
 
-const printSection = notes => {
-  if (!notes.length) {
-    addSection();
+document.querySelector("main").addEventListener("click", e => {
+  const target = e.target;
+  const type = target.dataset.type;
+  if (type !== "save" && type !== "remove") {
+    return;
   } else {
-    notes.forEach(note => {
-      const { id, text } = note;
-      addSection(null, id, text);
-    });
+    const section = target.parentNode.parentNode;
+    type === "save" && saveNote(section);
+    type === "remove" && removeNote(section);
   }
+});
+
+const printSection = () => {
+  const notes = getNotes();
+  console.log(notes);
+  Object.keys(notes).forEach(item => {
+    addSection(null, notes[item].id, notes[item].text);
+  });
 };
 
 const saveNote = section => {
-  let flag = false;
   const id = section.id;
   const text = section.querySelector(`textarea`).value;
   const notes = getNotes();
-
-  const note = {
-    id,
-    text
-  };
-
-  for (let i = 0; i < notes.length; i++) {
-    if (notes[i].id === id) {
-      flag = true;
-      notes[i].text = text;
-      break;
-    }
-  }
-
-  if (!flag) {
-    notes.push(note);
-    notes.sort((a, b) => {
-      return a.id - b.id;
-    });
-  }
-
-  sessionStorage.setItem("notes", JSON.stringify([...notes]));
+  sessionStorage.setItem(
+    "notes",
+    JSON.stringify({ ...notes, [id]: { id, text } })
+  );
+  document.querySelector(`[id='${id}'] > textarea`).textContent = text;
 };
 
 document.querySelector(".add").addEventListener("click", addSection);
@@ -72,35 +61,16 @@ document.querySelector(".clear").addEventListener("click", () => {
   addSection();
 });
 
-const removeNote = id => {
+const removeNote = section => {
+  const id = section.id;
   const notes = getNotes();
-  for (let i = 0; i < notes.length; i++) {
-    if (notes[i].id === id) {
-      notes.splice(i, 1);
-      break;
-    }
-  }
-  sessionStorage.setItem("notes", JSON.stringify([...notes]));
-};
-
-const clickIcons = () => {
-  document.querySelectorAll(".save").forEach(save => {
-    save.addEventListener("click", e => {
-      const section = e.target.parentNode.parentNode;
-      saveNote(section);
-    });
-  });
-  document.querySelectorAll(".remove").forEach(remove => {
-    remove.addEventListener("click", e => {
-      const section = e.target.parentNode.parentNode;
-      removeNote(section.id);
-      section.remove();
-    });
-  });
+  delete notes[id];
+  sessionStorage.setItem("notes", JSON.stringify({ ...notes }));
+  section.remove();
 };
 
 const init = () => {
-  printSection(getNotes());
+  printSection();
 };
 
 init();
