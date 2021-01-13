@@ -85,31 +85,45 @@ const getMovieByID = async id => {
   printDetail(response);
 };
 
-const setRemoveDetail = () => {
-  document.querySelector(".fa-times").addEventListener("click", () => {
-    if (!document.querySelector("section").classList.contains("hidden")) {
-      document.querySelector("section").classList.add("hidden");
-    }
-    if (document.querySelector("main").classList.contains("detail-main")) {
-      document.querySelector("main").classList.remove("detail-main");
-    }
-  });
+const removeDetail = () => {
+  if (!document.querySelector("section").classList.contains("hidden")) {
+    document.querySelector("section").classList.add("hidden");
+  }
+  if (document.querySelector("main").classList.contains("detail-main")) {
+    document.querySelector("main").classList.remove("detail-main");
+  }
 };
 
-const setClickPoster = () => {
-  document.querySelectorAll(".img").forEach(img => {
-    img.addEventListener("click", e => {
-      const posterID = e.target.id;
-      getMovieByID(posterID);
-      if (!document.querySelector("main").classList.contains("detail-main")) {
-        document.querySelector("main").classList.add("detail-main");
-      }
-      if (document.querySelector("section").classList.contains("hidden")) {
-        document.querySelector("section").classList.remove("hidden");
-      }
-    });
-  });
+document.querySelector("section").addEventListener("click", e => {
+  console.log(e.target);
+  const target = e.target;
+  const type = target.dataset.type;
+  if (type !== "remove") {
+    return;
+  } else {
+    removeDetail();
+  }
+});
+
+const clickPoster = id => {
+  getMovieByID(id);
+  if (!document.querySelector("main").classList.contains("detail-main")) {
+    document.querySelector("main").classList.add("detail-main");
+  }
+  if (document.querySelector("section").classList.contains("hidden")) {
+    document.querySelector("section").classList.remove("hidden");
+  }
 };
+
+document.querySelector("main").addEventListener("click", e => {
+  const target = e.target;
+  const type = target.dataset.type;
+  if (type !== "poster") {
+    return;
+  } else {
+    clickPoster(target.id);
+  }
+});
 
 const setSection = () => {
   document.querySelector("main").innerHTML += `
@@ -144,10 +158,13 @@ const printList = response => {
   }
   results.map(result => {
     const { original_title, original_name, poster_path, id } = result;
+    const imgUrl = poster_path
+      ? `${imgURL}w500${poster_path}`
+      : `./img/empty.png`;
 
     html += `
       <div>
-        <sapn id=${id} class="img" style="background-image:url(${imgURL}w500${poster_path}), url(./img/empty.png), url(../img/empty.png)"></sapn>
+        <sapn id=${id} class="img" style="background-image:url(${imgUrl})" data-type="poster"></sapn>
         <span class="title hidden">${original_title || original_name}</span>
       </div>
     `;
@@ -155,7 +172,6 @@ const printList = response => {
 
   container.innerHTML += html;
   loading = false;
-  setClickPoster();
 };
 
 const printDetail = response => {
@@ -183,6 +199,12 @@ const printDetail = response => {
     runtime,
     seasons
   } = data;
+  const imgUrl = poster_path
+    ? `${imgURL}w500${poster_path}`
+    : `./img/empty.png`;
+  const backImgUrl = backdrop_path
+    ? `${imgURL}original${backdrop_path}`
+    : `./img/empty.png`;
   let html = "";
   let infoArr = [];
   let info = "";
@@ -202,15 +224,14 @@ const printDetail = response => {
   adult ? infoArr.push("18+") : "";
 
   infoArr.forEach((value, index) => {
-    console.log(value);
     info += index < infoArr.length - 1 ? `${value} / ` : value;
   });
 
   html += `
-    <span class="remove-detail"><i class="fas fa-times"></i></span>
-    <div class="backdrop-img" style="background-image: url(${imgURL}original${backdrop_path})" ></div>
+    <span class="remove-detail"><i class="fas fa-times" data-type="remove"></i></span>
+    <div class="backdrop-img" style="background-image: url(${backImgUrl})" ></div>
     <div class="detail">
-    <span class="poster" style="background-image:url(${imgURL}w500${poster_path}), url(./img/empty.png), url(../img/empty.png)"></span>
+    <span class="poster" style="background-image:url(${imgUrl})"></span>
     <div class="detail-info">
       <h2 class="title">${
         original_title || original_name || "Title cannot be loaded"
@@ -223,5 +244,4 @@ const printDetail = response => {
 
   document.querySelector("section").innerHTML = html;
   loading = false;
-  setRemoveDetail();
 };

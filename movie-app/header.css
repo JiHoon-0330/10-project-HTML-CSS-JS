@@ -15,6 +15,7 @@ body {
 
 i {
   font-family: FontAweseom;
+  cursor: pointer;
 }
 
 a {
@@ -98,6 +99,7 @@ main h2 {
 }
 
 .container .img {
+  cursor: pointer;
   display: block;
   position: relative;
   padding-bottom: 150%;
