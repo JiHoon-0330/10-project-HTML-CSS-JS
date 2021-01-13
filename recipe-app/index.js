@@ -5,6 +5,7 @@ const setFavoriteMeals = async () => {
     let cnt = 6;
     while (storage.length && cnt) {
       const id = storage.pop();
+      console.log(id);
       const {
         data: { meals },
         error
@@ -30,8 +31,6 @@ const setRandomMeal = async () => {
   html += getHTML(meals[0], error, "random");
   document.querySelector(".random__loading").textContent = "";
   document.querySelector(".recipe__info").innerHTML = html;
-  const id = document.querySelector(".img").id;
-  setHeart(id);
 };
 
 const init = () => {

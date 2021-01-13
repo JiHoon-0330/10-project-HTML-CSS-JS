@@ -39,7 +39,7 @@ const setRecipe = async () => {
     setSameCategory(strCategory);
 
     for (let i = 1; i <= 20; i++) {
-      if (meal[`strIngredient${i}`] === "") {
+      if (meal[`strIngredient${i}`] == null) {
         break;
       } else {
         ul += `<li>${meal[`strIngredient${i}`]}  ${
@@ -59,15 +59,13 @@ const setRecipe = async () => {
           <span class="title" title="${strMeal}">${strMeal}</span>
           <span class="tag">#${strArea} #${strCategory}</span>
         </div>
-        <span><i class="fas fa-heart"></i></span>
+        <span><i class="fas fa-heart" data-type="heart" data-id="${idMeal}"></i></span>
       </div>
       <pre class="instructions">${strInstructions}<pre>
     </div>
       `;
 
     document.querySelector(".recipe").innerHTML = html;
-    const id = document.querySelector(".img").id;
-    setHeart(id);
   }
 };
 

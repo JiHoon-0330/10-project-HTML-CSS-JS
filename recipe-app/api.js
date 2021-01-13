@@ -48,26 +48,30 @@ const saveMeal = (meals, id) => {
   sessionStorage.setItem("meals", JSON.stringify([...meals, id]));
 };
 
-const setHeart = id => {
-  const heart = document.querySelector(".fa-heart");
-  let meals = getMealsSessionStorage();
+document.querySelector("body").addEventListener("click", e => {
+  const target = e.target;
+  const dataset = target.dataset;
+  const type = dataset.type;
+  const id = dataset.id;
+  if (type !== "heart") {
+    return;
+  } else {
+    let meals = getMealsSessionStorage();
+    if (meals.includes(id)) {
+      target.classList.add("red");
+    }
 
-  if (meals.includes(id)) {
-    heart.classList.add("red");
-  }
-
-  heart.addEventListener("click", () => {
     meals = getMealsSessionStorage();
     if (meals.includes(id)) {
       removeMeal(meals, id);
-      heart.classList.remove("active__red");
+      target.classList.remove("active__red");
     } else {
       saveMeal(meals, id);
-      heart.classList.add("active__red");
+      target.classList.add("active__red");
     }
-    heart.classList.toggle("red");
-  });
-};
+    target.classList.toggle("red");
+  }
+});
 
 // search
 const searchWord = word => {
@@ -103,7 +107,7 @@ const getHTML = (meal, error, tag) => {
       </a>
       <div class="random">
       <span title="${strMeal}">${strMeal}</span>
-      <span><i class="fas fa-heart"></i></span>
+      <span><i class="fas fa-heart" data-type="heart" data-id="${idMeal}"></i></span>
       </div>`;
     } else {
       html += `
