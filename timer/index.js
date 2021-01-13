@@ -51,11 +51,26 @@ document.querySelector(".ok").addEventListener("click", () => {
   };
 
   sessionStorage.setItem("data", JSON.stringify(data));
+  setHidden();
 });
 
 const init = () => {
   countdown();
   setInterval(countdown, 1000);
+
+  const newDate = new Date();
+  document.querySelector("#date").value = `${newDate.getFullYear()}-${
+    newDate.getMonth() + 1 < 10
+      ? `0${newDate.getMonth() + 1}`
+      : newDate.getMonth() + 1
+  }-${newDate.getDate() < 10 ? `0${newDate.getDate()}` : newDate.getDate()}`;
+  console.log(
+    `${newDate.getFullYear()}-${
+      newDate.getMonth() + 1 < 10
+        ? `0${newDate.getMonth() + 1}`
+        : newDate.getMonth() + 1
+    }-${newDate.getDate() < 10 ? `0${newDate.getDate()}` : newDate.getDate()}`
+  );
 };
 
 init();
